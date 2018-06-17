@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by liwei
+-->
+<html>
+
+<head>
+    <title>${WEB_NAME!}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="李维的个人博客。好coding，不求甚解，每有good idea，便欣然忘食。" />
+    <meta name="keywords" content="李维, abreaking，个人博客" />
+    <meta name="author" content="李维" />
+    <link rel="icon" href="${CTPATH}/images/icon/favicon.ico" />
+    <!--[if lte IE 8]><script src="${CTPATH}/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="${CTPATH}/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="${CTPATH}/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="${CTPATH}/assets/css/ie8.css" /><![endif]-->
+    <!-- Scripts -->
+    <script src="${CTPATH}/assets/js/jquery.min.js"></script>
+    <script src="${CTPATH}/assets/js/skel.min.js"></script>
+    <script src="${CTPATH}/assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="${CTPATH}/assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="${CTPATH}/assets/js/main.js"></script>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+
+    <!-- 文章内容 -->
+        <section class="text_content">
+            <header class="main">
+                <h3>${content.title!}</h3>
+                <div class="author row uniform">
+                    <div class="author_avatar  2u(xsmall)">
+                        <@jp.users role="root">
+                            <img src="${CPATH}${(me.avatar)!}" height="40px">
+                        </@jp.users>
+                    </div>
+                    <div class="author_detail 10u">
+                        <div>${content.nickame!}</div>
+                        <script type="text/javascript">
+                            var t ="${content.created}";
+                            document.write(dateFormatByDatetime(t));
+                        </script>
+                    </div>
+                </div>
+            </header>
+            ${content.text!}
+        </section>
+
+
+
+    <hr class="major" />
+
+    <!-- 推荐文章-->
+    <div class="section recommend">
+        <header>
+             <span class="tag">
+                <a href="javascript:void(0)"  class="fa fa-caret-down" ></a>
+            </span>
+            <h4><a href="javascript:void(0)"  name="recommend">下一篇</a></h4>
+        </header>
+
+
+        <@jp.recommendContent id="${content.id!}">
+            <div class="row uniform">
+                <!--<div class="1u">
+                    <img src="${(next.firstImage)!}" width="100%">
+                </div>-->
+                <div class="10u">
+                    <a href="${(next.url)!}"><h5>${(next.title)!}</h5></a>
+                    <div>${(next.summary)!}</div>
+                </div>
+            </div>
+        </@jp.recommendContent>
+
+    </div>
+
+
+    <!-- 发表评论-->
+    <div class="section comment">
+        <header>
+            <span class="tag">
+                <a href="javascript:void(0)"  class="fa fa-caret-right" onclick="toggleIcon('fa-caret-down',this,'#send_comment');"></a>
+            </span>
+            <h4><a href="javascript:void(0)" onclick="toggleIcon('fa-caret-down','.comment .tag a','#send_comment');">发表评论</a></h4>
+
+        </header>
+        <form method="post" action="${CPATH}/comment/submit" id="send_comment" hidden="hidden">
+
+            <input type="hidden" name="cid" value="${(content.id)!}">
+            <input type="hidden" name="anchor" value="allComment">
+            <input type="hidden" id="parent_id" name="parent_id">
+            <div class="row uniform">
+                <div class="4u 10u$(xsmall)">
+                    <input type="text" name="author" value="" placeholder="怎么称呼" />
+                </div>
+
+                <div class="4u$ 10u$(xsmall)">
+                    <input type="email" name="email" value="" placeholder="你的邮箱" />
+                </div>
+
+
+                <em>选择一个你喜欢的头像</em>
+                <div class="12u 12u$(xsmall) avatar">
+                    <input id="checked_avatar" name="user_id" hidden="hidden" value="99999">
+
+                    <@jp.users pageSize="20" role="ceshi">
+                    <#list users as user>
+                    <img alt="${user.id!}" src="${user.avatar!}">
+                </#list>
+                </@jp.users>
+                </div>
+
+                <!-- Break -->
+                <div class="8u$ 12u$(xsmall)">
+                    <textarea name="text" placeholder="你的评论（必填）" rows="6" required="required"></textarea>
+                </div>
+                <!-- Break -->
+                <div class="12u$">
+                    <ul class="actions">
+                        <li><input type="submit" value="提交" class="special" /></li>
+                        <li><input type="reset" value="重置" /></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="section allComment" >
+        <@jp.commentPage pageSize="10">
+        <#if page ??>
+        <header>
+            <h5><a href="javascipt:void(0)" name="allComment">- 全部评论：${page.totalRow!}条 -</a></h5>
+        </header>
+        <div class="all_comment">
+            <#list page.getList() as comment>
+            <div class="row uniform comment">
+                <div class="1u 3u(xsmall) 2u(medium) comment_avatar">
+                    <img src="${CPATH}${comment.avatar!TPATH+'/assets/images/avatar.jpg'}" />
+                    <!--<img class="avatar" height="100px" src="${CPATH}${comment.avatar!TPATH+'/assets/images/avatar.jpg'}" />-->
+                </div>
+                <div class="11u 9u(xsmall) 10u(medium) row uniform">
+                    <div class="12u 12u(xsmall)">
+                        <span class="comment_author">${comment.author!comment.nickname!comment.username!}</span>
+                        <br>
+                        <script type="text/javascript">
+                            var t ="${comment.created}";
+                            document.write(dateFormatByDatetime(t));
+                        </script>
+                    </div>
+
+                    <#if comment.qc_content ??>
+                    <div class="normal refrence_comment">
+                        <a>回复&nbsp;<strong style="color: red;">${comment.qc_author!}</strong>&nbsp;的内容</a>
+                        &emsp;&emsp;${comment.qc_content!}
+                    </div>
+                </#if>
+                <div class="12u$ normal  comment_content">${comment.text!}</div>
+            </div>
+            <div class="2u$ -10u  reply">
+                <a href="#send_comment" onclick="reply('${comment.id!}')">回复</a>
+            </div>
+        </div>
+        </#list>
+        </div>
+        <#if (page.totalRow> 10 )>
+        <ul class="x-page">
+            <@pagination anchor="allComment">
+            <#list pages as pi>
+            <li class="${pi.style!}">
+                <a href="${pi.url!}">${pi.text!}</a>
+            </li>
+            </#list>
+            </@pagination>
+        </ul>
+        </#if>
+        </#if>
+        </@jp.commentPage>
+    </div>
+<br /><br />
+
+</div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="inner">
+
+        <@jp.users role="root">
+        <section id="abreaking">
+            <img src="${CPATH}${(me.avatar)!}">
+            <p>
+                <strong>${(me.nickname)!}</strong>
+            </p>
+            <span>${(me.signature)!}</span>
+            <br>
+            <!--TODO-->
+            <span class="more">
+                <a  href="http://www.abreaking.com" class="fa fa-home"> 主页</a> |
+                <a href="#" class="fa fa-phone-square"> 联系我</a> |
+                <a href="${CPATH}/message" class="fa fa-commenting"> 留言</a>
+            </span>
+
+        </section>
+        </@jp.users>
+    <!-- TODO -->
+    <!--<section id="search" class="alt">
+        <form method="post" action="${CPATH}/s">
+            <input type="text" name="query" placeholder="Search" />
+            <input type="submit" value="search">
+        </form>
+    </section>-->
+
+
+
+    <!-- Menu -->
+    <nav id="menu">
+        <header class="major">
+            <h2>分类</h2>
+        </header>
+        <ul>
+            <li><a href="${CPATH}/">首页</a></li>
+            <li><a href="${CPATH}/article-shici-1">诗词</a></li>
+            <li><a href="${CPATH}/article-suibi-1">随笔</a></li>
+            <li>
+                <span class="opener">技术</span>
+                <ul>
+                    <li><a href="${CPATH}/article-java-1">Java</a></li>
+                    <li><a href="${CPATH}/article-linux-1">Linux</a></li>
+                    <li><a href="${CPATH}/article-html-1">前端</a></li>
+                    <li><a href="${CPATH}/article-fenbushi-1">分布式、大数据</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- TODO -->
+    <!--<section>
+        <header class="major">
+            <h2>联系我</h2>
+        </header>
+        <p>作者现居成都，从事IT行业，.</p>
+        <ul class="contact">
+            <li class="fa-envelope-o"><a href="#">information@untitled.tld</a></li>
+            <li class="fa-phone">(000) 000-0000</li>
+            <li class="fa-home">1234 Somewhere Road #8254<br />
+                Nashville, TN 00000-0000</li>
+        </ul>
+    </section>-->
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy; CopyRight. All rights reserved. <a href="http://www.abreaking.com">abreaking</a><br> Designed by : <a href="https://www.abreaking.com">liwei</a>.
+            <br>蜀ICP备18001554号-1
+        </p>
+    </footer>
+
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+    //TODO IE的兼容性待作
+    $(function() {
+        $(".avatar img").click(function() {
+            $(this).siblings().css({
+                "height": "3em",
+                "-webkit-filter": "grayscale(1)"
+            }); //将其他的图片大小置为正常
+            $(this).css({
+                "height": "4em",
+                "-webkit-filter": "grayscale(0)"
+            }); //选中的图片就加大一些
+            var value = $(this).attr("alt");
+            $("#checked_avatar").val(value); //选中的值放在隐藏输入框里
+        });
+    })
+</script>
+<script type="text/javascript">
+    function reply(id) {
+        $("#parent_id").val(id);
+        $("#send_comment").toggle();
+    }
+
+
+
+</script>
+
+</html>

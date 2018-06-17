@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jpress-addon-helloworld" />
+        <module name="jpress-consts" />
+        <module name="jpress-db-api" />
+        <module name="jpress-db-mysql" />
+        <module name="jpress-message" />
+        <module name="jpress-model" />
+        <module name="jpress-oauth2" />
+        <module name="jpress-search-api" />
+        <module name="jpress-search-dbsimple" />
+        <module name="jpress-utils" />
+        <module name="jpress-web" />
+        <module name="jpress-web-core" />
+        <module name="jpress-web-template-jblog" />
+        <module name="jpress-web-template-liwei" />
+        <module name="jpress-web-template-the3" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jpress" target="1.5" />
+      <module name="jpress-addon-helloworld" target="1.7" />
+      <module name="jpress-consts" target="1.7" />
+      <module name="jpress-db-api" target="1.7" />
+      <module name="jpress-db-mysql" target="1.7" />
+      <module name="jpress-message" target="1.7" />
+      <module name="jpress-model" target="1.7" />
+      <module name="jpress-oauth2" target="1.7" />
+      <module name="jpress-search-api" target="1.7" />
+      <module name="jpress-search-dbsimple" target="1.7" />
+      <module name="jpress-utils" target="1.7" />
+      <module name="jpress-web" target="1.7" />
+      <module name="jpress-web-core" target="1.7" />
+      <module name="jpress-web-template-jblog" target="1.7" />
+      <module name="jpress-web-template-liwei" target="1.7" />
+      <module name="jpress-web-template-the3" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

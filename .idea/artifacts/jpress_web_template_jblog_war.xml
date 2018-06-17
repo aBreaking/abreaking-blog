@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jpress-web-template-jblog:war">
+    <output-path>$PROJECT_DIR$/jpress-web-template-jblog/target</output-path>
+    <root id="archive" name="template-jblog.war">
+      <element id="artifact" artifact-name="jpress-web-template-jblog:war exploded" />
+    </root>
+  </artifact>
+</component>

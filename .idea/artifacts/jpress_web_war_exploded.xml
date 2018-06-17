@@ -1,0 +1,66 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="jpress-web:war exploded">
+    <output-path>$PROJECT_DIR$/jpress-web/target/jpress-web-1.0</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="jpress-web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.jfinal:cos:26Dec2008" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.22" />
+          <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:2.10.2.2.21" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.12" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
+          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.5" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.5" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: com.jfinal:jfinal:2.2" />
+          <element id="library" level="project" name="Maven: com.jfinal:jfinal-weixin:1.7" />
+          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.9.2" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.21" />
+          <element id="archive" name="jpress-utils-1.0.jar">
+            <element id="module-output" name="jpress-utils" />
+          </element>
+          <element id="archive" name="jpress-db-api-1.0.jar">
+            <element id="module-output" name="jpress-db-api" />
+          </element>
+          <element id="archive" name="jpress-db-mysql-1.0.jar">
+            <element id="module-output" name="jpress-db-mysql" />
+          </element>
+          <element id="archive" name="jpress-oauth2-1.0.jar">
+            <element id="module-output" name="jpress-oauth2" />
+          </element>
+          <element id="archive" name="jpress-message-1.0.jar">
+            <element id="module-output" name="jpress-message" />
+          </element>
+          <element id="archive" name="jpress-search-api-1.0.jar">
+            <element id="module-output" name="jpress-search-api" />
+          </element>
+          <element id="archive" name="jpress-search-dbsimple-1.0.jar">
+            <element id="module-output" name="jpress-search-dbsimple" />
+          </element>
+          <element id="archive" name="jpress-consts-1.0.jar">
+            <element id="module-output" name="jpress-consts" />
+          </element>
+          <element id="archive" name="jpress-model-1.0.jar">
+            <element id="module-output" name="jpress-model" />
+          </element>
+          <element id="archive" name="jpress-web-core-1.0.jar">
+            <element id="module-output" name="jpress-web-core" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/jpress-web/target/jpress-web-1.0/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="jpress-web/web/Web" />
+      <element id="artifact" artifact-name="jpress-web-template-jblog:war exploded" />
+      <element id="artifact" artifact-name="jpress-web-template-the3:war exploded" />
+      <element id="artifact" artifact-name="jpress-web-template-liwei:war exploded" />
+    </root>
+  </artifact>
+</component>

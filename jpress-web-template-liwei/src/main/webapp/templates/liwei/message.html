@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by liwei
+-->
+<html>
+
+<head>
+    <title>${WEB_NAME!}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="李维的个人博客。好coding，不求甚解，每有good idea，便欣然忘食。" />
+    <meta name="keywords" content="李维, abreaking，个人博客" />
+    <meta name="author" content="李维" />
+    <link rel="icon" href="${CTPATH}/images/icon/favicon.ico" />
+    <!--[if lte IE 8]><script src="${CTPATH}/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="${CTPATH}/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="${CTPATH}/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="${CTPATH}/assets/css/ie8.css" /><![endif]-->
+    <!-- Scripts -->
+    <script src="${CTPATH}/assets/js/jquery.min.js"></script>
+    <script src="${CTPATH}/assets/js/skel.min.js"></script>
+    <script src="${CTPATH}/assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="${CTPATH}/assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="${CTPATH}/assets/js/main.js"></script>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="index.html" class="menu"><strong>留言</strong>
+                <a href="#" class="logo"><img src="${CTPATH}/images/icon/logo.png"></a>
+            </header>
+
+            <!-- Banner -->
+            <div id="writeMessage">
+                <span class="tag">
+                    <a href="javascript:void(0)"  class="fa fa-caret-right" onclick="toggleIcon('fa-caret-down',this,'#say-hello');"></a>
+                </span>
+                <h4><a href="javascript:void(0)" onclick="toggleIcon('fa-caret-down','#writeMessage .tag a','#say-hello');">写留言</a></h4>
+
+                <div id="say-hello" >
+                    <form  action="${CPATH}/message/submit" method="post" class="row uniform send-message">
+                        <input type="hidden" name="anchor" value="messageBorder">
+                        <div class="4u -2u 10u(small)">
+                            <input type="text" name="author" placeholder="怎么称呼" />
+                        </div>
+                        <div class="4u$ 10u$(small)">
+                            <input type="text" name="email" placeholder="你的邮箱（可选）"/>
+                        </div>
+                        <div class="8u$ -2u 12u(small)">
+                            <textarea name="text" placeholder="说两句呗" required="required"></textarea>
+                        </div>
+                        <div class="2u -5u -4u(small)" >
+                            <input type="submit" value="提交">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <section class="message_border row uniform" id="messageBorder">
+
+                <@jp.messagePage pageSize="10" pageNumber="1">
+                <#if page ??>
+                <#list page.getList() as message>
+                <article class=" 8u -2u 11u$(small) -1u(small)">
+                    <div class="row uniform m_content">
+
+                        <div class="m_name 12u">
+                            <h5>${message.author}</h5>
+                            <span>&nbsp;
+                                <script type="text/javascript">
+                                    var t ="${message.created}";
+                                    document.write(dateFormatByDatetime(t));
+                                </script>
+                                说
+                            </span>
+                        </div>
+                        <div class="m_text  10u$ -1u">
+                            <p>${message.text}</p>
+                            <div class="m_reply">
+                                <a name="${message.id}" href="javascript:void(0)" onclick="reply(this)">回复</a>
+                                <input hidden="hidden" name="parent_id" value="${message.id}" />
+                            </div>
+                        </div>
+
+
+
+                        <!-- 有回复的内容 -->
+                        <#if (message.sonNumber>0)>
+                        <@jp.messagePage pageSize="20" pId="${message.id}">
+                        <#list page.getList() as son>
+                        <div class="10u -1u">
+                            <div class="row uniform">
+                                <div class="12u row uniform	">
+                                    <div class="m_name 12u$">
+                                        <h6>${son.author}</h6>
+                                        <span>&nbsp;
+                                            <script type="text/javascript">
+                                                var t ="${son.created}";
+                                                document.write(dateFormatByDatetime(t));
+                                            </script>
+                                            回复
+                                        </span>
+                                    </div>
+                                    <div class="m_text 10u$ -1u ">
+                                        <p>${son.text}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </#list>
+                        </@jp.messagePage>
+                        </#if>
+
+
+                    </div>
+                </article>
+                </#list>
+
+            <!-- 这里的分页还不知道怎么整 -->
+
+
+
+
+                </#if>
+                </@jp.messagePage>
+
+            </section>
+
+        </div>
+    </div>
+
+
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="inner">
+
+        <@jp.users role="root">
+        <section id="abreaking">
+            <img src="${CPATH}${(me.avatar)!}">
+            <p><strong>${(me.nickname)!}的个人博客</strong></p>
+            <span>${(me.signature)!}</span>
+            <br>
+            <span class="more">
+                <a  href="http://www.abreaking.com" class="fa fa-home"> 主页</a> |
+                <a href="#" class="fa fa-phone-square"> 联系我</a> |
+                <a href="${CPATH}/message" class="fa fa-commenting"> 留言</a>
+            </span>
+        </section>
+    </@jp.users>
+    <!-- TODO -->
+    <!--<section id="search" class="alt">
+        <form method="post" action="${CPATH}/s">
+            <input type="text" name="query" placeholder="Search" />
+            <input type="submit" value="search">
+        </form>
+    </section>-->
+
+
+
+    <!-- Menu -->
+    <nav id="menu">
+        <header class="major">
+            <h2>分类</h2>
+        </header>
+        <ul>
+            <li><a href="${CPATH}/">首页</a></li>
+            <li><a href="${CPATH}/article-shici-1">诗词</a></li>
+            <li><a href="${CPATH}/article-suibi-1">随笔</a></li>
+            <li>
+                <span class="opener">技术</span>
+                <ul>
+                    <li><a href="${CPATH}/article-java-1">Java</a></li>
+                    <li><a href="${CPATH}/article-linux-1">Linux</a></li>
+                    <li><a href="${CPATH}/article-html-1">前端</a></li>
+                    <li><a href="${CPATH}/article-fenbushi-1">分布式、大数据</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy; CopyRight. All rights reserved. <a href="http://www.abreaking.com">abreaking</a><br> Designed by : <a href="https://www.abreaking.com">liwei</a>.
+            <br>蜀ICP备18001554号-1
+        </p>
+    </footer>
+
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+<style type="text/css">
+    #writeMessage{
+        margin-top: 3em;
+    }
+    #writeMessage h4{
+        display: inline;
+    }
+
+    #say-hello{
+        background: white;
+        height: 40vh;
+        border-radius: 1rem;
+        margin-top: 1em;
+        display: none;
+    }
+    #say-hello input[type="text"]{
+        height: 3em;
+        box-shadow: 0px 0px 5px black inset;
+        color: black;
+    }
+    #say-hello textarea{
+        height: 15em;
+        box-shadow: 0px 0px 10px black inset;
+        color: black;
+    }
+
+    .message_border article{
+        margin-top: 2em;
+    }
+
+    .m_content{
+        background-color: transparent;
+        padding: 0 0 1em 0;
+        border-radius: 0.5em;
+        box-shadow: 0px 0px 20px #260802;
+
+    }
+    .m_reply{
+        text-align: right;
+    }
+    .m_text p{
+        font-size: 1.35em;
+        margin: 0 0 0.5em 0;
+    }
+
+</style>
+<script type="text/javascript">
+
+
+    function reply(e){
+        /*$(".reply-message").hide();*/
+        showReplyBorder(e);
+        $(e).siblings(".reply-message").toggle();
+    }
+
+    function showReplyBorder(e){
+        if($(e).parent().has("form").length>=1){
+            return;
+        }
+        $(e).parent().append("<form  action='${CPATH}/message/submit' method='post'  class='row uniform reply-message'></form>");
+
+        //动态设置下父留言的id
+        var parent_id = $(e).siblings("input[name='parent_id']").val();
+        $(e).siblings("form").append('<input type="hidden" id="parent_id" name="parent_id" value="'+parent_id+'">');
+        $(e).siblings("form").append('<input type="hidden" name="anchor" value="'+parent_id+'">');
+        $(e).siblings("form").append('<div class="4u -2u 10u(small)"><input type="text" name="author" placeholder="怎么称呼"/></div>');
+
+        $(e).siblings("form").append('<div class="8u$ -2u 12u(small)"><textarea name="text" placeholder="说两句呗"></textarea></div>');
+        $(e).siblings("form").append('<div class="2u -5u" ><input type="submit" value="提交"></div>');
+        $(e).siblings("form").hide();
+    }
+
+
+</script>
+
+</html>

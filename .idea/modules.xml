@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jpress.iml" filepath="$PROJECT_DIR$/jpress.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-addon-helloworld/jpress-addon-helloworld.iml" filepath="$PROJECT_DIR$/jpress-addon-helloworld/jpress-addon-helloworld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-consts/jpress-consts.iml" filepath="$PROJECT_DIR$/jpress-consts/jpress-consts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-db-api/jpress-db-api.iml" filepath="$PROJECT_DIR$/jpress-db-api/jpress-db-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-db-mysql/jpress-db-mysql.iml" filepath="$PROJECT_DIR$/jpress-db-mysql/jpress-db-mysql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-message/jpress-message.iml" filepath="$PROJECT_DIR$/jpress-message/jpress-message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-model/jpress-model.iml" filepath="$PROJECT_DIR$/jpress-model/jpress-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-oauth2/jpress-oauth2.iml" filepath="$PROJECT_DIR$/jpress-oauth2/jpress-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-search-api/jpress-search-api.iml" filepath="$PROJECT_DIR$/jpress-search-api/jpress-search-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-search-dbsimple/jpress-search-dbsimple.iml" filepath="$PROJECT_DIR$/jpress-search-dbsimple/jpress-search-dbsimple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-utils/jpress-utils.iml" filepath="$PROJECT_DIR$/jpress-utils/jpress-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-web/jpress-web.iml" filepath="$PROJECT_DIR$/jpress-web/jpress-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-web-core/jpress-web-core.iml" filepath="$PROJECT_DIR$/jpress-web-core/jpress-web-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-web-template-jblog/jpress-web-template-jblog.iml" filepath="$PROJECT_DIR$/jpress-web-template-jblog/jpress-web-template-jblog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-web-template-liwei/jpress-web-template-liwei.iml" filepath="$PROJECT_DIR$/jpress-web-template-liwei/jpress-web-template-liwei.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpress-web-template-the3/jpress-web-template-the3.iml" filepath="$PROJECT_DIR$/jpress-web-template-the3/jpress-web-template-the3.iml" />
+    </modules>
+  </component>
+</project>

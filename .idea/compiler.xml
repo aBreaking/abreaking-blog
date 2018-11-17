@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="addonhelloworld" />
         <module name="common" />
         <module name="db" />
         <module name="message" />
@@ -18,5 +17,8 @@
         <module name="webtemplateliwei" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="addonhelloworld" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

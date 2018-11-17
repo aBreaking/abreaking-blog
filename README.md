@@ -12,7 +12,7 @@ JFinal-后台web框架
 Maven-依赖属性管理
 
 ## 作者
-[李维](http://www.abreaking.com)
+[李维@abreaking](http://www.abreaking.com)
 
 ## 鸣谢
 使用了[杨福海](http://www.yangfuhai.com)的JPress后台博客框架

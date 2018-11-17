@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="addonhelloworld" />
+        <module name="common" />
+        <module name="db" />
+        <module name="message" />
+        <module name="model" />
+        <module name="oauth2" />
+        <module name="search" />
+        <module name="web" />
+        <module name="webcore" />
+        <module name="webtemplateliwei" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

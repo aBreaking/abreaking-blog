@@ -1,0 +1,69 @@
+/**
+ * Copyright (c) 2015-2016, Michael Yang 杨福海 (fuhai999@gmail.com).
+ *
+ * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.abreaking.model;
+
+import com.abreaking.model.base.BaseUser;
+import com.abreaking.model.core.Table;
+import com.abreaking.model.query.MetaDataQuery;
+
+import java.util.Date;
+
+@Table(tableName = "user", primaryKey = "id")
+public class User extends BaseUser<User> {
+	private static final long serialVersionUID = 1L;
+
+	public static final String ROLE_ADMINISTRATOR = "administrator";
+	public static final String STATUS_NORMAL = "normal";
+	public static final String STATUS_FROZEN = "frozen";
+
+	public boolean isAdministrator() {
+		return ROLE_ADMINISTRATOR.equals(getRole());
+	}
+
+	public boolean isFrozen() {
+		return STATUS_FROZEN.equals(getStatus());
+	}
+
+	@Override
+	public boolean save() {
+		if (getCreated() == null) {
+			setCreated(new Date());
+		}
+		return super.save();
+	}
+
+	@Override
+	public boolean update() {
+		removeCache(getId());
+		removeCache(getMobile());
+		removeCache(getUsername());
+		removeCache(getEmail());
+		return super.update();
+	}
+	
+	public String metadata(String key) {
+		Metadata m = MetaDataQuery.me().findByTypeAndIdAndKey(METADATA_TYPE, getId(), key);
+		if (m != null) {
+			return m.getMetaValue();
+		}
+		return null;
+	}
+
+	public String getUrl() {
+		return "/user/" + getId();
+	}
+
+}

@@ -1,0 +1,48 @@
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="inner">
+        <@jp.users role="root">
+        <section id="abreaking">
+            <img src="${CPATH}${(me.avatar)!}">
+            <div class="motto">${(me.signature)!}</div>
+
+            <br>
+            <div class="more">
+                <a href="http://www.abreaking.com/" class="fa fa-home"> 主页</a> |
+                <a href="http://blog.abreaking.com/#" class="fa fa-phone-square"> 联系我</a> |
+                <a href="${CPATH}/message" class="fa fa-commenting"> 留言</a>
+            </div>
+
+        </section>
+    </@jp.users>
+    <!-- TODO -->
+    <!--<section id="search" class="alt">
+        <form method="post" action="${CPATH}/s">
+            <input type="text" name="query" placeholder="Search" />
+            <input type="submit" value="search">
+        </form>
+    </section>-->
+
+    <!-- Menu -->
+    <nav  class="menu show-in-table hide-in-phone">
+        <ul id="menu-table">
+            <#include "menu.html"/>
+        </ul>
+    </nav>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <span>© CopyRight 2018 <a href="http://www.abreaking.com">abreaking.com</a>. All rights reserved.</span><br>
+        <span>Developed by liwei@abreaking</span><br>
+        <span>Thanks to Chaixf`s UI design</span><br>
+        <span>蜀ICP备18001554号</span>
+    </footer>
+    <div id="adorn">
+        <img class="adorn-1" src="${CTPATH}/images/adorn/bg-1.png" />
+        <img class="adorn-2" src="${CTPATH}/images/adorn/bg-2.png" />
+        <img class="adorn-3" src="${CTPATH}/images/adorn/bg-3.png" />
+    </div>
+
+</div>
+
+</div>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name=”renderer” content=”webkit”>
+    <meta http-equiv=”X-UA-Compatible” content=”IE=Edge,chrome=1″ >
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" >
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="${CPATH}/static/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${CPATH}/static/font-awesome/css/font-awesome.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${CPATH}/static/lte/css/AdminLTE.css">
+    <link rel="stylesheet" href="${CPATH}/static/lte/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="${CPATH}/static/plugins/toastr/toastr.css">
+
+    <link href="${CPATH}/static/plugins/fine-uploader/fine-uploader-new.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="${CPATH}/static/plugins/html5/html5shiv.min.js"></script>
+    <script src="${CPATH}/static/plugins/html5/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!-- jQuery 2.1.4 -->
+    <script src="${CPATH}/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+    <script src="${CPATH}/static/plugins/jquery/jquery.form.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="${CPATH}/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="${CPATH}/static/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="${CPATH}/static/lte/js/app.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="${CPATH}/static/jpress/admin/js/common.js"></script>
+    <!-- layer -->
+    <script src="${CPATH}/static/layer/layer.js"></script>
+    <!-- pace -->
+    <script src="${CPATH}/static/plugins/pace/pace.min.js"></script>
+    <script src="${CPATH}/static/plugins/toastr/toastr.js"></script>
+    <script src="${CPATH}/static/plugins/fine-uploader/jquery.fine-uploader.js"></script>
+
+</head>
+<body>
+
+
+<section class="content-header">
+    <h1></h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <section class="col-md-8  col-xs-12">
+                <label>在此处上传Word的xml模板文件
+                </label>
+                <div id="word-uploader-gallery"></div>
+            </section>
+            <section class="col-md-12">
+                <div class="box-body">
+                    <form action="" method="POST" id="form">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>已上传的模板</th>
+                                <th>删除</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <#if templates ??>
+                                    <#list templates as template>
+                                    <tr class="jp-onmouse">
+                                        <td>
+                                            <label class="jp-common-pad">
+                                                <input class="jp-common-pad" name="templateItem" type="radio" value="${template!}">
+                                        <td>
+                                            <strong><a class="article-title">${template!}</a> </strong>
+                                        </td>
+                                        <td>
+                                            <a><a href="#" onclick="doDeleteTemplate('${template!}')">删除</a></a>
+                                        </td>
+                                    </tr>
+                                    </#list>
+                                    <#else>
+                                    <tr class="jp-onmouse">
+                                        <td>还有没有模板，请先上传模板</td>
+                                    </tr>
+                                </#if>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-sm-6 col-md-6 ">
+            <div class="panel panel-success">
+                <header class="panel-heading">生成合同</header>
+                <article class="panel-body">
+                    <section class="col-md-12  col-xs-12">
+                        <label>请上传要生成合同的excel文件
+                        </label>
+                        <div id="excel-uploader-gallery"></div>
+                    </section>
+                </article>
+                <article class="panel-body">
+                    <label>合同下载</label>
+                    <div>
+                        <a href="#" onclick="doDownload()">点我下载</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<script type="text/template" id="qq-template-gallery">
+    <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="或拖动文件到此上传">
+        <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+        </div>
+        <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+            <span class="qq-upload-drop-area-text-selector"></span>
+        </div>
+        <div class="qq-upload-button-selector btn btn-primary ">
+            <div>选择文件</div>
+        </div>
+
+        <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+            <li>
+                <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                <div class="qq-progress-bar-container-selector qq-progress-bar-container">
+                    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                </div>
+                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                <div class="qq-thumbnail-wrapper">
+                    <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+                </div>
+                <button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
+                <button type="button" class="qq-upload-retry-selector qq-upload-retry">
+                    <span class="qq-btn qq-retry-icon" aria-label="重试"></span>
+                    重试
+                </button>
+
+                <div class="qq-file-info">
+                    <div class="qq-file-name">
+                        <span class="qq-upload-file-selector qq-upload-file"></span>
+                        <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+                    </div>
+                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                    <span class="qq-upload-size-selector qq-upload-size"></span>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+                        <span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
+                    </button>
+                    <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+                        <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+                    </button>
+                    <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+                        <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+                    </button>
+                </div>
+            </li>
+        </ul>
+
+        <dialog class="qq-alert-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Close</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-confirm-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">No</button>
+                <button type="button" class="qq-ok-button-selector">Yes</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-prompt-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <input type="text">
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                <button type="button" class="qq-ok-button-selector">Ok</button>
+            </div>
+        </dialog>
+    </div>
+</script>
+<script type="text/javascript">
+
+    var uploadOptions = {
+        template: 'qq-template-gallery',
+        request: {
+            endpoint: '${CPATH}/util/office/uploadWord'
+        },
+        thumbnails: {
+            placeholders: {
+                waitingPath: '${CPATH}/static/plugins/fine-uploader/placeholders/waiting-generic.png',
+                notAvailablePath: '${CPATH}/static/plugins/fine-uploader/placeholders/not_available-generic.png'
+            }
+        }
+    };
+    uploadOptions.request.endpoint = '${CPATH}/util/office/uploadWord';
+    $('#word-uploader-gallery').fineUploader(uploadOptions);
+    uploadOptions.request.endpoint = '${CPATH}/util/office/uploadExcel';
+    $('#excel-uploader-gallery').fineUploader(uploadOptions);
+
+    function doDownload(){
+        var template = $("input[name='templateItem']:checked").val();
+        if (template){
+            window.location.href = "${CPATH}/util/office/download?template="+template;
+        } else{
+            alert("请先选择模板再下载")
+        }
+    }
+
+    function doDeleteTemplate(template){
+        var r = confirm("确定要删除"+template+"这个模板吗?");
+        if (r==true){
+            doAjax("deleteTemplate","template="+template,true);
+        }
+
+    }
+
+    function doAjax(method,data,refresh){
+        var config = {
+            url: "${CPATH}/util/office/"+method,
+            type: "post",
+            data: data,
+            success: function(result) {
+                if (refresh){
+                    console.log("liwei->"+result);
+                    window.location.href = "${CPATH}/util/office/jiamei";
+                }
+            }
+        };
+        $.ajax(config);
+    }
+
+
+
+</script>
+
+</body>
+</html>

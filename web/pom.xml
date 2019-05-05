@@ -57,11 +57,19 @@
 
         <dependency>
             <groupId>com.abreaking</groupId>
+            <artifactId>office</artifactId>
+            <version>${blog.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.abreaking</groupId>
             <artifactId>web-template-liwei</artifactId>
             <version>${blog.version}</version>
             <type>war</type>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
     <build>

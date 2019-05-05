@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="${CPATH}/static/github-markdown-css/github-markdown.css" />
+
+<body>
+
+    <div>
+        <textarea id="markdownWrite"></textarea>
+        <input type="button" onclick="format()">
+    </div>
+
+    <article class="markdown-body">
+        <span id="htmlShow2"></span>
+    </article>
+
+</body>
+<script src="${CPATH}/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    function format(){
+        var markdownText = $("#markdownWrite").val();
+        var config = {
+            url: "${CPATH}/markdown/github",
+            type: "post",
+            data: "text="+markdownText,
+            success: function(result) {
+                $("#htmlShow2").html(result.message);
+            }
+        };
+        $.ajax(config);
+    }
+
+</script>
+</html>

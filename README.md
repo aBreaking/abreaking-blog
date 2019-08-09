@@ -7,18 +7,15 @@ ABREAKING
 
 ![](./web-template-liwei/src/main/webapp/templates/liwei/tpl_screenshot.png)
 
-##使用到的框架
-JFinal-后台web框架
-Maven-依赖属性管理
+## 技术
+SpringBoot+mybaits
 
 ## 作者
 [李维@abreaking](http://www.abreaking.com)
 
-## 鸣谢
-使用了[杨福海](http://www.yangfuhai.com)的JPress后台博客框架
-
-参考了[翁天信个人博客](https://blog.dandyweng.com/)设计风格
-
-感谢chaixf同学帮助的UI设计
+## Refrence
+ My-Blog:[https://github.com/ZHENFENG13/My-Blog](https://github.com/ZHENFENG13/My-Blog)
+ 
+PIXELARITY: [https://pixelarity.com/](https://pixelarity.com/)
 
 

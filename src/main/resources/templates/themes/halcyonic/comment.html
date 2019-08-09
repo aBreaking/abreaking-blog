@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="themes/halcyonic/index :: head('')"></head>
+	<style type="text/css">
+
+		section.panel{
+			padding: 3rem 3rem 2.5rem 3rem !important;
+		}
+		#divided{
+			position: relative;
+		}
+		#divided:before {
+			content: '';
+			position: absolute;
+			top: .5rem;
+			width: 2px;
+			height: 100%;
+			margin-left: -3.5rem;
+			background-color: rgba(0, 0, 0, 0.15);
+		}
+
+
+
+	</style>
+	<body class="">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<div th:replace="themes/halcyonic/index :: headNav('contact')"></div>
+
+			<!-- Content -->
+			<div id="content">
+				<div class="container">
+					<div class="row" >
+						<div class="col-12">
+							<section class="panel">
+								<div class="row">
+									<div class="col-8 col-12-medium col-12-small">
+										<p>欢迎在这里留下你的脚印！你有什么想说的，还是想与我交换友链，或者你发现本站的bug，你都可以在这里写下你的留言。</p>
+										<form id="comment-form" >
+											<input type="hidden" name="coid" id="coid"/>
+											<input type="hidden" name="cid" id="cid" value="99"/>
+											<input type="hidden" name="_csrf_token" th:value="${_csrf_token}"/>
+											<div class="fields">
+												<div class="field third">
+													<input placeholder="怎么称呼" type="text" name="author" id="name" />
+												</div>
+												<div class="field third">
+													<input placeholder="你的邮箱" type="email" name="mail" id="email" />
+												</div>
+												<div class="field third">
+													<input placeholder="你的网站" type="text" name="url" id="url" />
+												</div>
+												<div class="field">
+													<label for="message">Message</label>
+													<textarea placeholder="来都来了，说两句呗。" name="text" id="message" rows="4"></textarea>
+												</div>
+											</div>
+											<ul class="actions">
+												<li><input type="button" onclick="subComment()" value="biu~" class="button primary" /></li>
+											</ul>
+										</form>
+										<span>tips：如果有留下你的邮箱，你的邮箱不会被别人看到，我会尽快回复你。</span>
+									</div>
+									<div class="col-1" ></div>
+									<div id="divided" class="col-3 col-12-medium col-12-small">
+										<p>或者你通过以下方式找到我</p>
+										<ul class="contact-icons color1">
+											<li class="icon">
+												<a href="https://github.com/aBreaking"><img th:src="@{/halcyonic/icon/github.svg}"></a>
+											</li>
+											<li class="icon">
+												<a href="https://blog.csdn.net/abreaking2012"><img th:src="@{/halcyonic/icon/csdn.svg}"></a>
+											</li>
+											<li class="icon">
+												<a href="https://www.toutiao.com/c/user/100164093841/#mid=1613400691819524"><img th:src="@{/halcyonic/icon/toutiao.svg}"></a>
+											</li>
+											<li class="icon">
+												<a onclick="mail()" href="javascript:void(0)"><img th:src="@{/halcyonic/icon/mail.svg}"></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<div id="comment-board" class="col-8 col-10-medium col-12-small">
+
+							<ol class="comment-list">
+								<th:block th:if="${comments.size==0}">
+									沙发
+								</th:block>
+								<th:block th:each="comment :${comments.list}">
+									<li th:id="'li-comment-'+${comment.coid}" class="comment-body comment-parent comment-odd">
+										<div th:id="'comment-'+${comment.coid}" class="comment-panel">
+											<div class="comment-view">
+												<div class="comment-header">
+													<!--设置get请求的参数-->
+													<div class="row">
+														<div class="">
+															<img class="avatar"
+																 th:src="@{${commons.gravatar(comment.author)}(s='80',r='G',d='')}"
+																 th:title="${comment.author}"
+																 width="60" height="60"/>
+														</div>
+														<div class="">
+															<div class="comment-author">
+																<span th:if="${comment.url == ''}"  rel="external nofollow"
+																	  th:text="${comment.author}"></span>
+																<a th:if="${comment.url != ''}" th:onclick="|goHref('${comment.url}')|" href="javascript:void(0);" rel="external nofollow"
+																   th:text="${comment.author}"></a>
+
+															</div>
+															<div>
+																<time class="comment-time" th:text="${commons.fmtdateFriendly(comment.created)}"></time>
+															</div>
+														</div>
+
+													</div>
+												</div>
+												<div class="comment-content" th:utext="${commons.article(comment.content)}">
+												</div>
+											</div>
+
+										</div>
+									</li>
+								</th:block>
+							</ol>
+							<div class="lists-navigator clearfix">
+								<ol class="page-navigator">
+									<th:block th:if="${comments.hasPreviousPage}">
+										<li class="prev"><a th:href="'?cp='+${comments.prePage}+'#comment-board'">上一页</a></li>
+									</th:block>
+									<th:block th:if="${comments.hasNextPage}">
+										<li class="next"><a th:href="'?cp='+${comments.nextPage}+'#comment-board'">下一页</a></li>
+									</th:block>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="themes/halcyonic/index :: footer"></div>
+
+		</div>
+		<div th:replace="themes/halcyonic/index :: myScript"></div>
+		<script type="text/javascript">
+            function mail() {
+                var who = "abreaking@163.com";
+                parent.location.href = 'mailto:' + who;
+            }
+
+		</script>
+	</body>
+
+</html>

@@ -1,32 +1,27 @@
-# Eclipse
-.project
+### STS ###
+.apt_generated
 .classpath
-.settings/
-
-# Maven
-target/
-dependency-reduced-pom.xml
-pom.xml.versionsBackup
 .factorypath
+.project
+.settings
+.springBeans
 
-# Gradle
-.gradle/
-build/
-
-#IDEA
-# idea ignore
-.idea/
-*.ipr
-*.iml
+### IntelliJ IDEA ###
+.idea
 *.iws
+*.iml
+*.ipr
 
-# temp ignore
-*.log
-*.cache
-*.diff
-*.patch
-*.tmp
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
-# system ignore
-.DS_Store
-Thumbs.db
+###my own###
+logs
+upload
+target
+out

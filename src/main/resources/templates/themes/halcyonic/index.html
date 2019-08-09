@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head(titleContent)">
+		<title th:text="${titleContent ?:commons.site_option('site_title')}"></title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-transform"/>
+		<meta http-equiv="Cache-Control" content="no-siteapp"/>
+		<meta name="keywords" th:content="${keywords ?: commons.site_option('site_keywords')}"/>
+		<meta name="description" th:content="${description ?:commons.site_option('site_description')}"/>
+		<link rel="shortcut icon" th:href="@{/user/img/favicon.png}"/>
+		<link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
+		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/row.css}" />
+		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css}" />
+	</head>
+
+	<body>
+	<div id="page-wrapper">
+		<div id="header" th:fragment="headNav(active)">
+			<div  class="container">
+				<div id="abreaking">
+					<h1>
+						<a href="http://blog.abreaking.com" id="logo">Abreaking</a>
+						<small style="display: block">李维的个人博客</small>
+					</h1>
+				</div>
+
+				<nav id="nav">
+					<a th:class="${active==null||active eq 'post'}?'active':''" th:href="@{'/'}">程序人生</a>
+					<a th:class="${active eq 'poetry'}?'active':''" th:href="@{'/poetry'}">诗词年华</a>
+					<a th:class="${active eq 'contact'}?'active':''" th:href="@{'/contact'}">联系我</a>
+					<!--<a th:class="${active eq 'about'}?'active':''" th:href="@{'/page-on-building/about'}">关于</a>
+					<a th:class="${active eq 'links'}?'active':''" th:href="@{'/page-on-building/links'}">友链</a>-->
+				</nav>
+
+			</div>
+		</div>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="container">
+				<div class="row aln-center">
+					<div class="col-9 col-9-medium col-12-small" >
+
+						<section th:each="article: ${articles.list}">
+							<div class="row">
+								<div class="col-8 col-12-medium col-12-small">
+									<header>
+										<h2><a class="index-title" th:href="${commons.permalink(article)}" th:text="${article.title}">...</a></h2>
+										<time th:text="${commons.fmtdateFriendly(article.created)}"></time>
+										| <small th:utext="${commons.show_categories(article.categories)}"></small>
+									</header>
+									<p>
+									<div th:text="${article.summary}"></div>
+									</p>
+								</div>
+								<div class="col-4 col-12-medium col-12-small post-thumbnail" >
+									<a th:href="${commons.permalink(article)}">
+										<div th:style="'background-image:url('+@{${commons.show_thumb(article)}}+');'"></div>
+									</a>
+								</div>
+							</div>
+						</section>
+						<div th:replace="comm/macros::pageNav(${articles},'←','→','page')"></div>
+					</div>
+
+					<div class="col-3 col-3-medium col-12-small">
+
+						<section id="category">
+							<header>
+								<h3>分类</h3>
+							</header>
+							<ul class="link-list">
+								<li th:each="c : ${category}">
+									<a th:href="@{'/category/'+${c.name}}" th:text="${c.name}"></a>
+								</li>
+							</ul>
+						</section>
+						<section id="search">
+							<header>
+								<h3>搜索</h3>
+							</header>
+							<form method="get" th:action="@{'/search'}">
+								<input type="search" name="keyword" placeholder="搜索内容，按回车提交" />
+							</form>
+						</section>
+						<section id="archive">
+							<header>
+								<h3>归档</h3>
+							</header>
+							<ul class="link-list">
+								<li th:each="archive : ${archives}">
+									<a th:href="@{'/archive/'+${archive.slug}}" th:text="${archive.name}">loading</a>
+								</li>
+							</ul>
+						</section>
+						<section id="recommend">
+							<header>
+								<h3>阅读排行</h3>
+							</header>
+							<ul class="link-list">
+								<li th:each="recommend : ${recommends}">
+									<a th:href="${commons.permalink(recommend)}" th:text="${recommend.title}">loading</a>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div id="footer" th:fragment="footer">
+			<div class="align-center">
+				<!-- 这里加个🚀 -->
+				<a class="icon-large" href="javascript:void(0)" onclick="scroll2Top()">
+					<img th:src="@{/halcyonic/icon/rocket.svg}" >
+				</a>
+			</div>
+
+			<div id="copyright" >
+
+				Design and developed by <a href="http://www.abreaking.com">liwei</a>
+				,
+				Power by <a href="https://github.com/ZHENFENG13/My-Blog">My-Blog</a>
+				and
+				<a href="https://pixelarity.com/">PIXELARITY</a>
+				<br>
+				© CopyRight 2018-2019 abreaking.com. All rights reserved.
+				<br>
+				蜀ICP备18001554号
+			</div>
+		</div>
+
+
+	</div>
+	<div th:fragment="myScript">
+		<script th:src="@{/halcyonic/assets/js/jquery.min.js}"></script>
+		<script th:src="@{/halcyonic/assets/js/browser.min.js}"></script>
+		<script th:src="@{/halcyonic/assets/js/breakpoints.min.js}"></script>
+		<script th:src="@{/halcyonic/assets/js/util.js}"></script>
+		<script th:src="@{/halcyonic/assets/js/main.js}"></script>
+	</div>
+
+
+	</body>
+
+
+</html>

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="blog" />
         <module name="common" />
         <module name="db" />
         <module name="message" />
@@ -18,7 +19,16 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="abreaking-common" target="1.8" />
+      <module name="abreaking-db" target="1.8" />
+      <module name="abreaking-message" target="1.8" />
+      <module name="abreaking-model" target="1.8" />
+      <module name="abreaking-oauth2" target="1.8" />
+      <module name="abreaking-search" target="1.8" />
+      <module name="abreaking-web" target="1.8" />
+      <module name="abreaking-web-core" target="1.8" />
       <module name="addonhelloworld" target="1.8" />
+      <module name="web-template-liwei" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

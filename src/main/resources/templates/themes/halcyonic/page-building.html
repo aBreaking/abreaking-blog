@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="themes/halcyonic/index :: head('')"></head>
+
+<style type="text/css">
+	.container{
+		margin-top: 5vh;
+	}
+	#footer{
+		width: 100%;
+		position: absolute;
+		bottom: 0px	;
+	}
+
+
+</style>
+
+<body>
+	<div th:replace="themes/halcyonic/index :: headNav(${page})"></div>
+	<div id="content">
+		<div class="container">
+			该页面正在建设中
+		</div>
+	</div>
+
+		<!-- Footer -->
+	<div th:replace="themes/halcyonic/index :: footer"></div>
+
+	<div th:replace="themes/halcyonic/index :: myScript"></div>
+</body>
+
+
+
+</html>

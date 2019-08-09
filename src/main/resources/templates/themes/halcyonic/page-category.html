@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="themes/halcyonic/index :: head('')"></head>
+
+	<style type="text/css">
+		section.tag{
+			position: relative;
+		}
+		.keyword{
+			font-weight: 600;
+			color: red !important;
+		}
+		.keyword:before{
+			position: absolute;
+			left: 12px;
+			font-weight: 600;
+			content: '▶';
+		}
+
+	</style>
+
+	<body>
+
+		<div id="page-wrapper">
+			<div th:replace="themes/halcyonic/index :: headNav('post')"></div>
+
+			<div id="content" class="topic">
+				<div class="container">
+					<div class="row aln-center">
+						<div class="col-9 col-9-medium col-12-small" >
+
+							<!--<section class="ol">
+								<ol class="breadcrumb">
+									<li><a th:href="@{'/'}">程序人生</a></li>
+									<li class="active"><span  th:text="${keyword}"></span></li>
+								</ol>
+							</section>-->
+
+							<section th:if="${articles.list.size()==0}">
+								没有找到对应的文章
+							</section>
+
+							<section th:each="article: ${articles.list}">
+								<div class="row">
+									<div class="col-8 col-12-small">
+										<header>
+											<h2><a class="index-title" th:href="${commons.permalink(article)}" th:text="${article.title}">...</a></h2>
+											<time th:text="${commons.fmtdateFriendly(article.created)}"></time>
+											| <small th:utext="${commons.show_categories(article.categories)}"></small>
+										</header>
+										<p>
+											<div th:text="${article.summary}"></div>
+										</p>
+									</div>
+									<div class="col-4 col-12-small post-thumbnail" >
+										<a th:href="${commons.permalink(article)}">
+											<div th:style="'background-image:url('+@{${commons.show_thumb(article)}}+');'"></div>
+										</a>
+
+									</div>
+								</div>
+							</section>
+							<div th:replace="comm/macros::pageTagNav(${articles},${type}+'/'+${keyword})"></div>
+						</div>
+
+						<div class="col-3 col-3-medium hide-small">
+							<th:block th:if="${type eq 'category'}">
+								<section class="tag">
+									<header>
+										<h3>分类</h3>
+									</header>
+									<ul class="link-list">
+										<li th:each="c : ${category}">
+											<a th:href="@{'/category/'+${c.name}}" th:class="${keyword == c.name}?'keyword':''"  th:text="${c.name}"></a>
+										</li>
+									</ul>
+								</section>
+							</th:block>
+
+							<th:block th:if="${type eq 'search'}">
+								<section class="tag">
+									<header>
+										<h3>搜索</h3>
+									</header>
+									<form method="get" th:action="@{'/search'}">
+										<input type="search" name="keyword" th:value="${keyword}" placeholder="搜索内容" />
+									</form>
+								</section>
+							</th:block>
+
+
+							<th:block th:if="${type eq 'archive'}">
+								<section class="tag">
+									<header>
+										<h3>归档</h3>
+									</header>
+									<ul class="link-list">
+										<li th:each="c : ${archives}">
+											<a th:href="@{'/archive/'+${c.name}}" th:class="${keyword == c.name}?'keyword':''" th:text="${c.name}">loading</a>
+										</li>
+									</ul>
+								</section>
+							</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+			<div th:replace="themes/halcyonic/index :: footer"></div>
+		</div>
+
+		<div th:replace="themes/halcyonic/index :: myScript"></div>
+	</body>
+
+
+
+</html>

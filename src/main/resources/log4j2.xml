@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 该xml配置中,xml元素大小写不敏感 -->
+<!-- status="off",log4j2把自身事件记录到控制台的配置，off表示不记录，其余的记录有trace，debug，info，warn，error，fatal -->
+<!-- monitorInterval表示检测更改配置的时间,单位是秒,最小间隔为5秒,0或负数表示不检测 -->
+<configuration name="test-cfg" status="off" monitorInterval="0">
+
+    <!-- 常量引用 -->
+    <properties>
+        <!--<property name="LOG_HOME">/opt/logs/api-logs/</property>-->
+        <property name="LOG_HOME">./logs</property>
+        <property name="FORMAT">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
+        <property name="LOGGER_FILE_DATE_PATTERN">%d{yyyy-MM}</property>
+        <property name="LEVEL">INFO</property>
+    </properties>
+
+    <!-- appender用于接收各种日志 -->
+    <appenders>
+        <!-- 常见的输出到console,常用于开发环境中,默认是system_err,还有一个system_out -->
+        <console name="console" target="system_out">
+            <!-- appender级别的日志过滤 -->
+            <!-- <thresholdFilter level="info" onMatch="accept" onMismatch="deny"/> -->
+            <patternLayout pattern="${FORMAT}"/>
+        </console>
+        <!-- 常用于开发环境,把日志记录到文件中,默认追加 -->
+        <file name="db_log" fileName="${LOG_HOME}/my-blog-db.log" append="true">
+            <patternLayout pattern="${FORMAT}"/>
+        </file>
+        <file name="service_log" fileName="${LOG_HOME}/my-blog-info.log" append="true">
+            <patternLayout pattern="${FORMAT}"/>
+        </file>
+        <!--<file name="visitor_log" fileName="${LOG_HOME}/visitor-info.log"  append="true">
+            <patternLayout pattern="${FORMAT}"/>
+        </file>-->
+        <RollingFile name="visitor_log" fileName="${LOG_HOME}/visitor-info.log"
+                     filePattern="${LOG_HOME}/logback/visitor-info.${LOGGER_FILE_DATE_PATTERN}.log"
+                     append="true">
+            <!-- 输出格式 -->
+            <PatternLayout    pattern="${FORMAT}" />
+            <!-- 设置策略 -->
+            <Policies>
+                <!-- 基于时间的触发策略。该策略主要是完成周期性的log文件封存工作。有两个参数： interval，integer型，指定两次封存动作之间的时间间隔。单位:以日志的命名精度来确定单位，
+                    比如yyyy-MM-dd-HH 单位为小时，yyyy-MM-dd-HH-mm 单位为分钟 modulate，boolean型，说明是否对封存时间进行调制。若modulate=true，
+                    则封存时间将以0点为边界进行偏移计算。比如，modulate=true，interval=4hours， 那么假设上次封存日志的时间为03:00，则下次封存日志的时间为04:00，
+                    之后的封存时间依次为08:00，12:00，16:00 -->
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true" />
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="info" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+            </Filters>
+        </RollingFile>
+
+    </appenders>
+
+
+    <!-- 接收appender -->
+    <loggers>
+        <logger name="org.apache.http" level="warn"/>
+        <!-- Spring -->
+        <logger name="org.springframework" level="WARN"/>
+        <!-- mybatis loggers -->
+        <logger name="com.ibatis" level="DEBUG"/>
+        <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"/>
+        <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
+        <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG"/>
+        <!-- sql loggers -->
+        <logger name="java.sql.Connection" level="DEBUG" additivity="true"/>
+        <logger name="java.sql.Statement" level="DEBUG" additivity="true"/>
+        <logger name="java.sql.PreparedStatement" level="=debug,stdout" additivity="true"/>
+        <logger name="java.sql.ResultSet" level="DEBUG" additivity="true"/>
+        <logger name="org.apache" level="WARN"/>
+
+        <!-- 对包进行更详细的配置 -->
+        <!-- additivity表示是否追加,防止重复,因为root已经接收过一次了 -->
+        <logger name="com.abreaking.blog.dao" level="${LEVEL}" additivity="true">
+            <appender-ref ref="db_log"/>
+        </logger>
+        <logger name="com.abreaking.blog.controller" level="${LEVEL}" additivity="false">
+            <appender-ref ref="service_log"/>
+        </logger>
+        <logger name="com.abreaking.blog.service" level="${LEVEL}" additivity="false">
+            <appender-ref ref="service_log"/>
+        </logger>
+        <logger name="com.abreaking.blog.interceptor" level="${LEVEL}" additivity="false">
+            <appender-ref ref="visitor_log"/>
+        </logger>
+        <!-- root logger,一般用于放置所有的appender -->
+        <root level="${LEVEL}">
+            <appender-ref ref="db_log"/>
+            <appender-ref ref="console"/>
+        </root>
+    </loggers>
+
+</configuration>

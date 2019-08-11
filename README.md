@@ -1,4 +1,4 @@
-ABREAKING
+Abreaking
 ================
 本站地址：[blog.abreaking.com](http://blog.abreaking.com)
 

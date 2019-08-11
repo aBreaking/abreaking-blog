@@ -42,7 +42,7 @@
 				<div class="row aln-center">
 					<div class="col-9 col-9-medium col-12-small" >
 
-						<section th:each="article: ${articles.list}">
+						<section th:each="article: ${articles.list}" th:fragment="articleList">
 							<div class="row">
 								<div class="col-8 col-12-medium col-12-small">
 									<header>
@@ -56,7 +56,7 @@
 								</div>
 								<div class="col-4 col-12-medium col-12-small post-thumbnail" >
 									<a th:href="${commons.permalink(article)}">
-										<div th:style="'background-image:url('+@{${commons.show_thumb(article)}}+');'"></div>
+										<div th:style="'background-image:url('+@{${commons.show_thumb(article.getCid())}}+');'"></div>
 									</a>
 								</div>
 							</div>

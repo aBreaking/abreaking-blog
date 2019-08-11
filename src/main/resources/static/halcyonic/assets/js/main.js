@@ -65,6 +65,7 @@ function scroll2Top(speed){
             clearInterval(intervalId);
         }
         $document.scrollTop($document.scrollTop() + (-20 * d));
+        d+=0.5;
     }, 15);
 }
 

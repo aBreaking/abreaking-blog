@@ -418,10 +418,12 @@ public class IndexController extends BaseController {
      */
     @GetMapping(value = "contact")
     public String Contact(HttpServletRequest request){
+        int contactId = 0;
         ContentVo contentVo = new ContentVo();
         contentVo.setAllowComment(true);
-        contentVo.setCid(99);
+        contentVo.setCid(contactId);
         completeArticle(request,contentVo);
+        request.setAttribute("contactId",contactId);
         return this.render("comment");
     }
 

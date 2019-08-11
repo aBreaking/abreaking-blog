@@ -39,7 +39,7 @@
 										<p>欢迎在这里留下你的脚印！你有什么想说的，还是想与我交换友链，或者你发现本站的bug，你都可以在这里写下你的留言。</p>
 										<form id="comment-form" >
 											<input type="hidden" name="coid" id="coid"/>
-											<input type="hidden" name="cid" id="cid" value="99"/>
+											<input type="hidden" name="cid" id="cid" th:value="${contactId}"/>
 											<input type="hidden" name="_csrf_token" th:value="${_csrf_token}"/>
 											<div class="fields">
 												<div class="field third">

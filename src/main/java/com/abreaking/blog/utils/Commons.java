@@ -310,9 +310,8 @@ public final class Commons {
      *
      * @return
      */
-    public static String show_thumb(ContentVo contents) {
-        int cid = contents.getCid();
-        int size = cid % 20;
+    public static String show_thumb(int number) {
+        int size = number % 14;
         size = size == 0 ? 1 : size;
         return "/user/img/rand/" + size + ".jpg";
     }

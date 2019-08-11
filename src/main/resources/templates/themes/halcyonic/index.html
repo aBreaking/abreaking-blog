@@ -14,16 +14,15 @@
 		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css}" />
 	</head>
 
+
 	<body>
 	<div id="page-wrapper">
 		<div id="header" th:fragment="headNav(active)">
 			<div  class="container">
-				<div id="abreaking">
-					<h1>
-						<a href="http://blog.abreaking.com" id="logo">Abreaking</a>
-						<small style="display: block">李维的个人博客</small>
-					</h1>
-				</div>
+				<a href="http://blog.abreaking.com" id="abreaking">
+					<img th:src="@{/user/img/abreaking.png}">
+				</a>
+
 
 				<nav id="nav">
 					<a th:class="${active==null||active eq 'post'}?'active':''" th:href="@{'/'}">程序人生</a>

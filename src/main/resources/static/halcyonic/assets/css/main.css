@@ -675,6 +675,19 @@ hr {
 			height: 155px;
 		}
 
+		#abreaking{
+			text-align: center;
+			color: #fff;
+		}
+		#abreaking a{
+			color: #fff;
+		}
+		#abreaking img{
+			width: 270px;
+			max-width: 60%;
+			margin-top: 30px;
+		}
+
 /* Features */
 	#features {
 		background: #353D40 url("images/bg03.jpg");
@@ -918,6 +931,8 @@ hr {
 				font-size: 1.1em;
 			}
 
+
+
 		/* Content */
 
 			#content h2 {
@@ -1092,14 +1107,7 @@ hr {
 					#navPanel .link:last-child {
 						border-bottom: 0;
 					}
-			#abreaking{
-				text-align: center;
-				color: #fff;
-				margin-top: 2rem;
-			}
-			#abreaking a{
-				color: #fff;
-			}
+
 
 			body.navPanel-visible #page-wrapper {
 				-moz-transform: translateX(275px);

@@ -316,19 +316,6 @@ public final class Commons {
         return "/user/img/rand/" + size + ".jpg";
     }
 
-
-    /**
-     * An :grinning:awesome :smiley:string &#128516;with a few :wink:emojis!
-     * <p>
-     * 这种格式的字符转换为emoji表情
-     *
-     * @param value
-     * @return
-     */
-    public static String emoji(String value) {
-        return EmojiParser.parseToUnicode(value);
-    }
-
     /**
      * 获取文章第一张图片
      *
@@ -352,6 +339,29 @@ public final class Commons {
         }
         return "";
     }
+
+    public static String show_thumb(ContentVo content) {
+        String thumbnail = content.getThumbnail();
+        if (null == thumbnail){
+            return show_thumb(content.getCid());
+        }
+        return thumbnail;
+    }
+
+
+    /**
+     * An :grinning:awesome :smiley:string &#128516;with a few :wink:emojis!
+     * <p>
+     * 这种格式的字符转换为emoji表情
+     *
+     * @param value
+     * @return
+     */
+    public static String emoji(String value) {
+        return EmojiParser.parseToUnicode(value);
+    }
+
+
 
     private static final String[] ICONS = {"bg-ico-book", "bg-ico-game", "bg-ico-note", "bg-ico-chat", "bg-ico-code", "bg-ico-image", "bg-ico-web", "bg-ico-link", "bg-ico-design", "bg-ico-lock"};
 

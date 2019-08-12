@@ -10,10 +10,9 @@
 		<meta name="description" th:content="${description ?:commons.site_option('site_description')}"/>
 		<link rel="shortcut icon" th:href="@{/user/img/favicon.png}"/>
 		<link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
-		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/row.css}" />
-		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css}" />
+		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/row.css?v=2.0}" />
+		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css?v=2.0}" />
 	</head>
-
 
 	<body>
 	<div id="page-wrapper">
@@ -28,8 +27,6 @@
 					<a th:class="${active==null||active eq 'post'}?'active':''" th:href="@{'/'}">程序人生</a>
 					<a th:class="${active eq 'poetry'}?'active':''" th:href="@{'/poetry'}">诗词年华</a>
 					<a th:class="${active eq 'contact'}?'active':''" th:href="@{'/contact'}">联系我</a>
-					<!--<a th:class="${active eq 'about'}?'active':''" th:href="@{'/page-on-building/about'}">关于</a>
-					<a th:class="${active eq 'links'}?'active':''" th:href="@{'/page-on-building/links'}">友链</a>-->
 				</nav>
 
 			</div>
@@ -55,7 +52,7 @@
 								</div>
 								<div class="col-4 col-12-medium col-12-small post-thumbnail" >
 									<a th:href="${commons.permalink(article)}">
-										<div th:style="'background-image:url('+@{${commons.show_thumb(article.getCid())}}+');'"></div>
+										<div th:style="'background-image:url('+@{${commons.show_thumb(article)}}+');'"></div>
 									</a>
 								</div>
 							</div>

@@ -91,6 +91,16 @@ public class ContentVo implements Serializable {
      */
     private String content;
 
+    /**
+     * 推荐分数
+     */
+    private String recommendScore;
+
+    /**
+     * 缩略图（可能有多个）
+     */
+    private String thumbnail;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCid() {
@@ -227,5 +237,21 @@ public class ContentVo implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getRecommendScore() {
+        return recommendScore;
+    }
+
+    public void setRecommendScore(String recommendScore) {
+        this.recommendScore = recommendScore;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

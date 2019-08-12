@@ -18,6 +18,8 @@
     <result column="allow_comment" jdbcType="BIT" property="allowComment" />
     <result column="allow_ping" jdbcType="BIT" property="allowPing" />
     <result column="allow_feed" jdbcType="BIT" property="allowFeed" />
+    <result column="recommend_score" jdbcType="BIT" property="recommendScore" />
+    <result column="thumbnail" jdbcType="BIT" property="thumbnail" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.abreaking.blog.model.Vo.ContentVo">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -82,7 +84,7 @@
   </sql>
   <sql id="Base_Column_List">
     cid, title,summary, slug, created, modified, author_id, type, status, tags, categories, hits,
-    comments_num, allow_comment, allow_ping, allow_feed
+    comments_num, allow_comment, allow_ping, allow_feed,recommend_score,thumbnail
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -148,13 +150,13 @@
       created, modified, author_id,
       type, status, tags,
       categories, hits, comments_num, 
-      allow_comment, allow_ping, allow_feed, 
+      allow_comment, allow_ping, allow_feed, recommend_score,thumbnail,
       content)
     values (#{cid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},#{summary,jdbcType=VARCHAR}, #{slug,jdbcType=VARCHAR},
       #{created,jdbcType=INTEGER}, #{modified,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{categories,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER}, 
-      #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT}, 
+      #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT}, #{recommendScore,jdbcType=INTEGER}, #{thumbnail,jdbcType=VARCHAR},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abreaking.blog.model.Vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
@@ -208,6 +210,12 @@
       <if test="allowFeed != null">
         allow_feed,
       </if>
+      <if test="recommendScore != null">
+        recommend_score,
+      </if>
+      <if test="thumbnail != null">
+        thumbnail,
+      </if>
       <if test="content != null">
         content,
       </if>
@@ -260,6 +268,12 @@
       </if>
       <if test="allowFeed != null">
         #{allowFeed,jdbcType=BIT},
+      </if>
+      <if test="allowFeed != null">
+        #{recommendScore,jdbcType=INTEGER},
+      </if>
+      <if test="allowFeed != null">
+        #{thumbnail,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -320,6 +334,12 @@
       <if test="record.allowFeed != null">
         allow_feed = #{record.allowFeed,jdbcType=BIT},
       </if>
+      <if test="record.recommendScore != null">
+        recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumbnail != null">
+        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -345,6 +365,8 @@
       allow_comment = #{record.allowComment,jdbcType=BIT},
       allow_ping = #{record.allowPing,jdbcType=BIT},
       allow_feed = #{record.allowFeed,jdbcType=BIT},
+    recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+    thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -366,7 +388,9 @@
       comments_num = #{record.commentsNum,jdbcType=INTEGER},
       allow_comment = #{record.allowComment,jdbcType=BIT},
       allow_ping = #{record.allowPing,jdbcType=BIT},
-      allow_feed = #{record.allowFeed,jdbcType=BIT}
+      allow_feed = #{record.allowFeed,jdbcType=BIT},
+    recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+    thumbnail = #{record.thumbnail,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -416,6 +440,12 @@
       <if test="allowFeed != null">
         allow_feed = #{allowFeed,jdbcType=BIT},
       </if>
+      <if test="recommendScore != null">
+        recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -441,6 +471,8 @@
       allow_comment = #{allowComment,jdbcType=BIT},
       allow_ping = #{allowPing,jdbcType=BIT},
       allow_feed = #{allowFeed,jdbcType=BIT},
+      recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+    thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
@@ -459,6 +491,8 @@
       comments_num = #{commentsNum,jdbcType=INTEGER},
       allow_comment = #{allowComment,jdbcType=BIT},
       allow_ping = #{allowPing,jdbcType=BIT},
+      recommend_score = #{record.recommendScore,jdbcType=INTEGER},
+      thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
       allow_feed = #{allowFeed,jdbcType=BIT}
     where cid = #{cid,jdbcType=INTEGER}
   </update>

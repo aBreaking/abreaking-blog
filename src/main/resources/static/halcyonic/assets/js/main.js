@@ -7,7 +7,8 @@
 (function($) {
 
 	var $window = $(window),
-		$body = $('body');
+		$body = $('body'),
+        $content = $("#content");
 
 	// Breakpoints.
 		breakpoints({
@@ -16,8 +17,39 @@
 			medium:  [ '737px',   '980px'  ],
 			small:   [ null,      '736px'  ]
 		});
+    // Hack: Enable IE workarounds.
+    if (browser.name == 'ie')
+        $body.addClass('ie');
 
-	// Nav.
+    // Touch?
+    if (browser.mobile)
+        $body.addClass('touch');
+
+    // Transitions supported?
+    if (browser.canUse('transition')) {
+
+        // Play initial animations on page load.
+        $window.on('load', function() {
+            window.setTimeout(function() {
+                $body.removeClass('is-preload');
+            }, 100);
+        });
+
+        // Prevent transitions/animations on resize.
+        var resizeTimeout;
+
+        $window.on('resize', function() {
+
+            window.clearTimeout(resizeTimeout);
+
+            $body.addClass('is-resizing');
+
+            resizeTimeout = window.setTimeout(function() {
+                $body.removeClass('is-resizing');
+            }, 100);
+
+        });
+    }
 
 		// Title Bar.
 			$(
@@ -50,6 +82,47 @@
 					target: $body,
 					visibleClass: 'navPanel-visible'
 				});
+
+                $content.poptrox({
+                    baseZIndex: 20000,
+                    caption: function($a) {
+
+                        var s = '';
+
+                        $a.nextAll().each(function() {
+                            s += this.outerHTML;
+                        });
+
+                        return s;
+
+                    },
+                    fadeSpeed: 300,
+                    onPopupClose: function() { $body.removeClass('modal-active'); },
+                    onPopupOpen: function() { $body.addClass('modal-active'); },
+                    overlayOpacity: 0,
+                    popupCloserText: '',
+                    popupHeight: 150,
+                    popupLoaderText: '',
+                    popupSpeed: 300,
+                    popupWidth: 150,
+                    selector: '.thumb > a',
+                    usePopupCaption: false,
+                    usePopupCloser: true,
+                    usePopupDefaultStyling: false,
+                    usePopupForceClose: true,
+                    usePopupLoader: true,
+                    usePopupNav: false,
+                    windowMargin: 50
+                });
+
+                // Hack: Set margins to 0 when 'xsmall' activates.
+                breakpoints.on('<=xsmall', function() {
+                    $main[0]._poptrox.windowMargin = 0;
+                });
+
+                breakpoints.on('>xsmall', function() {
+                    $main[0]._poptrox.windowMargin = 50;
+                });
 
 })(jQuery);
 

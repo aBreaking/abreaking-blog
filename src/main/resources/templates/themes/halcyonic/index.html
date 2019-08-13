@@ -14,7 +14,7 @@
 		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css?v=2.0}" />
 	</head>
 
-	<body>
+	<body class="is-preload">
 	<div id="page-wrapper">
 		<div id="header" th:fragment="headNav(active)">
 			<div  class="container">
@@ -132,6 +132,7 @@
 	</div>
 	<div th:fragment="myScript">
 		<script th:src="@{/halcyonic/assets/js/jquery.min.js}"></script>
+		<script th:src="@{/halcyonic/assets/js/jquery.poptrox.min.js}"></script>
 		<script th:src="@{/halcyonic/assets/js/browser.min.js}"></script>
 		<script th:src="@{/halcyonic/assets/js/breakpoints.min.js}"></script>
 		<script th:src="@{/halcyonic/assets/js/util.js}"></script>

@@ -11,6 +11,7 @@ import com.abreaking.blog.model.Bo.RestResponseBo;
 import com.abreaking.blog.model.Vo.OptionVo;
 import com.abreaking.blog.service.IOptionService;
 import com.abreaking.blog.utils.GsonUtils;
+import com.abreaking.blog.utils.IPKit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +75,7 @@ public class SettingController extends BaseController {
             if (StringUtils.isNotBlank(site_theme)) {
                 BaseController.THEME = "themes/" + site_theme;
             }
-            logService.insertLog(LogActions.SYS_SETTING.getAction(), GsonUtils.toJsonString(querys), request.getRemoteAddr(), this.getUid(request));
+            logService.insertLog(LogActions.SYS_SETTING.getAction(), GsonUtils.toJsonString(querys), IPKit.getIpAddrByRequest(request), this.getUid(request));
             return RestResponseBo.ok();
         } catch (Exception e) {
             String msg = "保存设置失败";
@@ -97,7 +98,7 @@ public class SettingController extends BaseController {
         }
         try {
             BackResponseBo backResponse = siteService.backup(bk_type, bk_path, "yyyyMMddHHmm");
-            logService.insertLog(LogActions.SYS_BACKUP.getAction(), null, request.getRemoteAddr(), this.getUid(request));
+            logService.insertLog(LogActions.SYS_BACKUP.getAction(), null, IPKit.getIpAddrByRequest(request), this.getUid(request));
             return RestResponseBo.ok(backResponse);
         } catch (Exception e) {
             String msg = "备份失败";

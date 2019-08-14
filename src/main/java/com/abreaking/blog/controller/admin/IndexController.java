@@ -15,6 +15,7 @@ import com.abreaking.blog.model.Vo.UserVo;
 import com.abreaking.blog.service.ILogService;
 import com.abreaking.blog.service.IUserService;
 import com.abreaking.blog.utils.GsonUtils;
+import com.abreaking.blog.utils.IPKit;
 import com.abreaking.blog.utils.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -94,7 +95,7 @@ public class IndexController extends BaseController {
             temp.setScreenName(screenName);
             temp.setEmail(email);
             userService.updateByUid(temp);
-            logService.insertLog(LogActions.UP_INFO.getAction(), GsonUtils.toJsonString(temp), request.getRemoteAddr(), this.getUid(request));
+            logService.insertLog(LogActions.UP_INFO.getAction(), GsonUtils.toJsonString(temp), IPKit.getIpAddrByRequest(request), this.getUid(request));
 
             //更新session中的数据
             UserVo original= (UserVo)session.getAttribute(WebConst.LOGIN_SESSION_KEY);
@@ -129,7 +130,7 @@ public class IndexController extends BaseController {
             String pwd = TaleUtils.MD5encode(users.getUsername() + password);
             temp.setPassword(pwd);
             userService.updateByUid(temp);
-            logService.insertLog(LogActions.UP_PWD.getAction(), null, request.getRemoteAddr(), this.getUid(request));
+            logService.insertLog(LogActions.UP_PWD.getAction(), null, IPKit.getIpAddrByRequest(request), this.getUid(request));
 
             //更新session中的数据
             UserVo original= (UserVo)session.getAttribute(WebConst.LOGIN_SESSION_KEY);

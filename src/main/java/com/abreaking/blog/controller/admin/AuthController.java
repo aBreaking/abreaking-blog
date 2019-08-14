@@ -8,6 +8,7 @@ import com.abreaking.blog.model.Bo.RestResponseBo;
 import com.abreaking.blog.model.Vo.UserVo;
 import com.abreaking.blog.service.ILogService;
 import com.abreaking.blog.service.IUserService;
+import com.abreaking.blog.utils.IPKit;
 import com.abreaking.blog.utils.TaleUtils;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -60,7 +61,7 @@ public class AuthController extends BaseController {
             if (StringUtils.isNotBlank(remeber_me)) {
                 TaleUtils.setCookie(response, user.getUid());
             }
-            logService.insertLog(LogActions.LOGIN.getAction(), null, request.getRemoteAddr(), user.getUid());
+            logService.insertLog(LogActions.LOGIN.getAction(), null, IPKit.getIpAddrByRequest(request), user.getUid());
         } catch (Exception e) {
             error_count = null == error_count ? 1 : error_count + 1;
             if (error_count > 3) {

@@ -1,5 +1,6 @@
 package com.abreaking.blog.controller.admin;
 
+import com.abreaking.blog.utils.IPKit;
 import com.github.pagehelper.PageInfo;
 import com.abreaking.blog.model.Bo.RestResponseBo;
 import com.abreaking.blog.model.Vo.UserVo;
@@ -116,7 +117,7 @@ public class PageController extends BaseController {
     @ResponseBody
     public RestResponseBo delete(@RequestParam int cid, HttpServletRequest request) {
         String result = contentsService.deleteByCid(cid);
-        logService.insertLog(LogActions.DEL_ARTICLE.getAction(), cid + "", request.getRemoteAddr(), this.getUid(request));
+        logService.insertLog(LogActions.DEL_ARTICLE.getAction(), cid + "", IPKit.getIpAddrByRequest(request), this.getUid(request));
         if (!WebConst.SUCCESS_RESULT.equals(result)) {
             return RestResponseBo.fail(result);
         }

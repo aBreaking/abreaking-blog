@@ -220,7 +220,7 @@ public class IndexController extends BaseController {
         CommentVo comments = new CommentVo();
         comments.setAuthor(author);
         comments.setCid(cid);
-        comments.setIp(request.getRemoteAddr());
+        comments.setIp(IPKit.getIpAddrByRequest(request));
         url = url.trim();
         if (StringUtils.isNotBlank(url)&&!url.startsWith("http")){
             url = "http://"+url;

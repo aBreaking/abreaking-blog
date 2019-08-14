@@ -80,7 +80,7 @@
 			small:    [ '481px',   '736px'  ],
 			xsmall:   [ '361px',   '480px'  ],
 			xxsmall:  [ null,      '360px'  ],
-			short:    '(min-aspect-ratio: 16/7)',
+			/*short:    '(min-aspect-ratio: 16/7)',*/
 			xshort:   '(min-aspect-ratio: 16/6)'
 		});
 

@@ -12,17 +12,18 @@
 		<link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
 		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/row.css?v=2.0.0}" />
 		<link rel="stylesheet" th:href="@{/halcyonic/assets/css/main.css?v=2.0.0}" />
+		<span id="isPreload">页面加载中...</span>
 	</head>
 
 	<body class="is-preload">
 	<div id="page-wrapper">
+
 		<div id="header" th:fragment="headNav(active)">
+
 			<div  class="container">
-				<a href="http://blog.abreaking.com" id="abreaking">
+				<a href="https://blog.abreaking.com" id="abreaking">
 					<img th:src="@{/user/img/abreaking.png}">
 				</a>
-
-
 				<nav id="nav">
 					<a th:class="${active==null||active eq 'post'}?'active':''" th:href="@{'/'}">程序人生</a>
 					<a th:class="${active eq 'poetry'}?'active':''" th:href="@{'/poetry'}">诗词年华</a>
@@ -30,6 +31,7 @@
 				</nav>
 
 			</div>
+
 		</div>
 
 		<!-- Content -->

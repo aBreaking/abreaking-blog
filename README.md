@@ -1,6 +1,6 @@
 Abreaking
 ================
-本站地址：[blog.abreaking.com](http://blog.abreaking.com)
+本站地址：[https://blog.abreaking.com](https://blog.abreaking.com)
 
 ## 网站名
 李维的个人博客

@@ -1971,3 +1971,12 @@ ul.actions li {
 .comment-view{
 	padding: 1.5rem 1.5rem 1rem 1.5rem;
 }
+
+/** isPreload **/
+#isPreload{
+	display: block;
+	position: fixed;
+	width: 100%;
+	top: 55%;
+	text-align: center;
+}

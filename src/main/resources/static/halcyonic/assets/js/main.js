@@ -28,11 +28,30 @@
     // Transitions supported?
     if (browser.canUse('transition')) {
 
+        var a = window.setTimeout(function () {
+            $("#isPreload").text("后台正在拼命处理中....");
+        },6000);
+        var b = window.setTimeout(function () {
+            $("#isPreload").text("可能第一次打开本站有点慢....");
+        },9000);
+        var c = window.setTimeout(function () {
+            $("#isPreload").text("还是没打开？这该死的服务器!!!");
+        },12000);
+        var d = window.setTimeout(function () {
+            $("#isPreload").text("要不重新刷新下本站呢");
+        },16000);
         // Play initial animations on page load.
         $window.on('load', function() {
             window.setTimeout(function() {
                 $body.removeClass('is-preload');
+                $("#isPreload").hide();
+                window.clearTimeout(a);
+                window.clearTimeout(b);
+                window.clearTimeout(c);
+                window.clearTimeout(d);
+                return;
             }, 100);
+
         });
 
         // Prevent transitions/animations on resize.

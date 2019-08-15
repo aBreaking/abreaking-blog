@@ -148,7 +148,7 @@ public class IndexController extends BaseController {
                 cp = "1";
             }
             request.setAttribute("cp", cp);
-            PageInfo<CommentBo> commentsPaginator = commentService.getComments(contents.getCid(), Integer.parseInt(cp), 6);
+            PageInfo<CommentBo> commentsPaginator = commentService.getComments(contents.getCid(), Integer.parseInt(cp), 12);
             request.setAttribute("comments", commentsPaginator);
         }
     }

@@ -198,6 +198,7 @@ public final class Commons {
         return "";
     }
 
+
     /**
      * 时间格式化
      * @param timestamp
@@ -210,6 +211,10 @@ public final class Commons {
 
         if (dateTime.get(Calendar.YEAR)!=nowTime.get(Calendar.YEAR)){
             return dateTime.get(Calendar.YEAR)+"年"+(dateTime.get(Calendar.MONTH)+1)+"月"+dateTime.get(Calendar.DATE)+"日";
+        }
+
+        if (dateTime.get(Calendar.MONTH)!=nowTime.get(Calendar.MONTH)){
+            return (dateTime.get(Calendar.MONTH)+1)+"月"+dateTime.get(Calendar.DATE)+"日";
         }
         
         if(nowTime.get(Calendar.DATE)==(dateTime.get(Calendar.DATE)+1)){	//昨天的

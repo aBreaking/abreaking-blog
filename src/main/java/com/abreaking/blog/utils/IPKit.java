@@ -1,5 +1,8 @@
 package com.abreaking.blog.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -61,4 +64,19 @@ public class IPKit {
             return localip;
         }
     }
+
+    /**
+     * 根据ip地址获取是哪个城市
+     * @return
+     */
+    public static String getCityByIp(String ip){
+        String requestUrl = "http://ip.taobao.com/service/getIpInfo.php";
+        String param = "ip="+ip;
+        String result = HttpUtils.sendGet(requestUrl, param);
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
+        JsonObject data = jsonObject.getAsJsonObject("data");
+        return data.get("country").getAsString()+data.get("region").getAsString()+data.get("city").getAsString();
+    }
+
 }

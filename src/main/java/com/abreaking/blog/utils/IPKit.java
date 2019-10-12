@@ -70,13 +70,14 @@ public class IPKit {
      * @return
      */
     public static String getCityByIp(String ip){
-        String requestUrl = "http://ip.taobao.com/service/getIpInfo.php";
+        String requestUrl = "http://whois.pconline.com.cn/ipJson.jsp";
         String param = "ip="+ip;
-        String result = HttpUtils.sendGet(requestUrl, param);
+        String s = HttpUtils.sendGet(requestUrl, param,"gbk");
+        String result = s.substring(s.indexOf("{\"ip\""), s.indexOf(");}"));
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
-        JsonObject data = jsonObject.getAsJsonObject("data");
-        return data.get("country").getAsString()+data.get("region").getAsString()+data.get("city").getAsString();
+        return jsonObject.get("addr").getAsString();
     }
+
 
 }

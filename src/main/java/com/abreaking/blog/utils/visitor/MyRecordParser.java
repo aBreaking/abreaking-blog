@@ -1,8 +1,12 @@
 package com.abreaking.blog.utils.visitor;
 
 import com.abreaking.blog.utils.IPKit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MyRecordParser implements RecordParser {
+
+    private static final Logger logger = LoggerFactory.getLogger(MyRecordParser.class);
 
     protected Visitor visitor ;
 
@@ -12,13 +16,20 @@ public class MyRecordParser implements RecordParser {
     private static final String TAG_OF_IP = "来路地址:";
 
     public MyRecordParser(){
-        this.visitor = new Visitor();
+
     }
 
     @Override
     public Visitor parse(String agentRecord, String visitRecord) {
-        parseAgentRecord(agentRecord);
-        parseVisitRecord(visitRecord);
+        this.visitor = new Visitor();
+        try{
+            parseAgentRecord(agentRecord);
+            parseVisitRecord(visitRecord);
+        }catch (Exception e){
+            logger.error("解析记录失败,agent语句为=>{"+agentRecord+"} visit语句为=>{"+visitRecord+"}",e);
+            throw e;
+        }
+
         return visitor;
     }
 

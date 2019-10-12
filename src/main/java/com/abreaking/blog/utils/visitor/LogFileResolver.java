@@ -17,6 +17,10 @@ public class LogFileResolver {
 
     private RecordParser recordParser;
 
+    public LogFileResolver(RecordParser parser){
+        this.recordParser = parser;
+    }
+
     /**
      * 就是读取每行每行的数据，然后再交给{@link RecordParser}去解析
      *

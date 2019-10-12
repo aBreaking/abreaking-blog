@@ -1,5 +1,6 @@
 package com.abreaking.blog.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
@@ -27,27 +28,27 @@ public class HttpUtils
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
-    public static String sendGet(String url, String param)
+    public static String sendGet(String url, String param,String responseCharset)
     {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try
         {
-            String urlNameString = url + "?" + param;
-            log.info("sendGet - {}", urlNameString);
+            String urlNameString = StringUtils.isBlank(param)?url:url + "?" + param;
+            log.debug("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), responseCharset));
             String line;
             while ((line = in.readLine()) != null)
             {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.debug("recv - {}", result);
         }
         catch (ConnectException e)
         {
@@ -98,7 +99,7 @@ public class HttpUtils
             String urlNameString = url + "?" + param;
             String userPass = username+":"+password;
             String encoding = new BASE64Encoder().encode(userPass.getBytes());
-            log.info("sendGet - {}", urlNameString);
+            log.debug("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();
 
@@ -113,7 +114,7 @@ public class HttpUtils
             {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.debug("recv - {}", result);
         }
         catch (ConnectException e)
         {
@@ -155,7 +156,7 @@ public class HttpUtils
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
-    public static String sendPost(String url, String param)
+    public static String sendPost(String url, String param,String responseCharset)
     {
         PrintWriter out = null;
         BufferedReader in = null;
@@ -163,7 +164,7 @@ public class HttpUtils
         try
         {
             String urlNameString = url + "?" + param;
-            log.info("sendPost - {}", urlNameString);
+            log.debug("sendPost - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
 
             URLConnection conn = realUrl.openConnection();
@@ -177,13 +178,13 @@ public class HttpUtils
             out = new PrintWriter(conn.getOutputStream());
             out.print(param);
             out.flush();
-            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), responseCharset));
             String line;
             while ((line = in.readLine()) != null)
             {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.debug("recv - {}", result);
         }
         catch (ConnectException e)
         {
@@ -222,6 +223,11 @@ public class HttpUtils
         return result.toString();
     }
 
+    public static String sendPost(String url, String param){
+        return sendPost(url,param,"utf-8");
+    }
+
+
 
     public static String sendSSLPost(String url, String param)
     {
@@ -229,7 +235,7 @@ public class HttpUtils
         String urlNameString = url + "?" + param;
         try
         {
-            log.info("sendSSLPost - {}", urlNameString);
+            log.debug("sendSSLPost - {}", urlNameString);
             SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, new TrustManager[] { new TrustAnyTrustManager() }, new java.security.SecureRandom());
             URL console = new URL(urlNameString);
@@ -255,7 +261,7 @@ public class HttpUtils
                     result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
                 }
             }
-            log.info("recv - {}", result);
+            log.debug("recv - {}", result);
             conn.disconnect();
             br.close();
         }

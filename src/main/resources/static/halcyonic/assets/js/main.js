@@ -30,16 +30,16 @@
 
         var a = window.setTimeout(function () {
             $("#isPreload").text("后台正在拼命处理中....");
-        },6000);
+        },5000);
         var b = window.setTimeout(function () {
-            $("#isPreload").text("可能第一次打开本站有点慢....");
-        },9000);
+            $("#isPreload").text("可能第一次打开本站是有点慢");
+        },10000);
         var c = window.setTimeout(function () {
-            $("#isPreload").text("还是没打开？这该死的服务器!!!");
-        },12000);
+            $("#isPreload").text("还没打开？这个垃圾服务器，总有一天我要把它换掉");
+        },15000);
         var d = window.setTimeout(function () {
             $("#isPreload").text("要不重新刷新下本站呢");
-        },16000);
+        },20000);
         // Play initial animations on page load.
         $window.on('load', function() {
             window.setTimeout(function() {

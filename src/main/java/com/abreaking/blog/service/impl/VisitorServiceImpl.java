@@ -22,7 +22,7 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public void insert(Visitor visitor) {
-
+        visitorVoMapper.insert(visitor);
     }
 
     @Override

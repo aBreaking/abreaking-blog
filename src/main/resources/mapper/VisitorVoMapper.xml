@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abreaking.blog.dao.VisitorVoMapper">
 
-    <resultMap id="BaseResultMap" type="com.abreaking.blog.model.Vo.AttachVo">
-        <id column="tsid" jdbcType="LONG" property="tsid" />
+    <resultMap id="BaseResultMap" type="com.abreaking.blog.utils.visitor.Visitor">
+        <id column="tsid" jdbcType="BIGINT" property="tsid" />
         <result column="ip" jdbcType="VARCHAR" property="ip" />
         <result column="city" jdbcType="VARCHAR" property="city" />
         <result column="addr" jdbcType="VARCHAR" property="addr" />
@@ -12,10 +12,10 @@
         <result column="access_time" jdbcType="VARCHAR" property="accessTime" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.abreaking.blog.model.Vo.AttachVo" useGeneratedKeys="true" keyProperty="id">
-        insert into t_attach (tsid, ip, city, addr, path, agent,access_time)
-        values (#{tsid,jdbcType=LONG}, #{ip,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
-          #{addr,jdbcType=VARCHAR}, #{path,jdbcType=INTEGER}, #{agent,jdbcType=INTEGER}, #{access_time,jdbcType=INTEGER}
+    <insert id="insert" parameterType="com.abreaking.blog.utils.visitor.Visitor"  keyProperty="tsid">
+        insert into t_visitor (tsid, ip, city, addr, path, agent,access_time)
+        values (#{tsid,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+          #{addr,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{accessTime,jdbcType=VARCHAR}
           )
   </insert>
 

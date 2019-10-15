@@ -13,4 +13,6 @@ public class VisitorStatisticsMain {
         List<Visitor> list = resolver.resolve(new File(filePath));
         System.out.println(list);
     }
+
+
 }

@@ -78,4 +78,16 @@ public class Visitor {
         this.addr = addr;
     }
 
+    @Override
+    public String toString() {
+        return "Visitor{" +
+                "tsid=" + tsid +
+                ", ip='" + ip + '\'' +
+                ", city='" + city + '\'' +
+                ", addr='" + addr + '\'' +
+                ", path='" + path + '\'' +
+                ", agent='" + agent + '\'' +
+                ", accessTime='" + accessTime + '\'' +
+                '}';
+    }
 }

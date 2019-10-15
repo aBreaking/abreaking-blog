@@ -28,6 +28,13 @@ public class LogFileResolver {
      */
     public List<Visitor> resolve(File logFile) {
         List<Visitor> list = new ArrayList<>();
+        resolve(logFile,(visitor)->{
+            list.add(visitor);
+        });
+        return list;
+    }
+
+    public void resolve(File logFile,VisitorCallBack visitorCallBack){
         try {
 
             BufferedReader reader  = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
@@ -39,7 +46,7 @@ public class LogFileResolver {
                 }
                 String visitLine = reader.readLine();
                 Visitor visitor = recordParser.parse(agentLine, visitLine);
-                list.add(visitor);
+                visitorCallBack.save(visitor);
             }
         } catch (FileNotFoundException e) {
             logger.error("找不到该文件"+logFile.getAbsolutePath(),e);
@@ -47,6 +54,9 @@ public class LogFileResolver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return list;
+    }
+
+    public interface VisitorCallBack{
+        void save(Visitor visitor);
     }
 }

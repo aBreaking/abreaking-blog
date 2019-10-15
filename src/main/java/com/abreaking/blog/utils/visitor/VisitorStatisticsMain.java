@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VisitorStatisticsMain {
 
-    private static String filePath = "F:\\myWebsite\\logs\\blog-visitor.2019-09.log";
+    private static String filePath = "D:\\abreaking\\myWebsite\\logs\\blog-visitor.log";
 
     public static void main(String args[]){
         RecordParser parser = new MyRecordParser();

@@ -21,6 +21,9 @@ public class HttpUtils
 {
     private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
 
+    private static final int CONNECT_TIME_OUT = 3000;
+    private static final int READ_TIME_OUT = 3000;
+
     /**
      * 向指定 URL 发送GET方法的请求
      *
@@ -41,6 +44,8 @@ public class HttpUtils
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setReadTimeout(READ_TIME_OUT);
+            connection.setConnectTimeout(CONNECT_TIME_OUT);
             connection.connect();
             in = new BufferedReader(new InputStreamReader(connection.getInputStream(), responseCharset));
             String line;

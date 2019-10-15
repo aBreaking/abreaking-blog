@@ -4,6 +4,10 @@ import com.abreaking.blog.utils.IPKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MyRecordParser implements RecordParser {
 
     private static final Logger logger = LoggerFactory.getLogger(MyRecordParser.class);
@@ -11,6 +15,7 @@ public class MyRecordParser implements RecordParser {
     protected Visitor visitor ;
 
     private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS";
     private static final String TAG_OF_USERAGENT = "UserAgent:";
     private static final String TAG_OF_PATH = "用户访问地址:";
     private static final String TAG_OF_IP = "来路地址:";
@@ -27,7 +32,6 @@ public class MyRecordParser implements RecordParser {
             parseVisitRecord(visitRecord);
         }catch (Exception e){
             logger.error("解析记录失败,agent语句为=>{"+agentRecord+"} visit语句为=>{"+visitRecord+"}",e);
-            throw e;
         }
 
         return visitor;
@@ -38,6 +42,16 @@ public class MyRecordParser implements RecordParser {
         if (indexOfAgent==-1){
             throw new RuntimeException("该条记录没有包含UserAgent");
         }
+        String accessTimestamp = agentRecord.substring(0, TIMESTAMP_PATTERN.length());
+        Long tsid ;
+        try {
+            Date date = new SimpleDateFormat(TIMESTAMP_PATTERN).parse(accessTimestamp);
+            tsid = date.getTime();
+        } catch (ParseException e) {
+            logger.error(accessTimestamp+"该时间有误");
+            tsid = 5000000000000L+System.currentTimeMillis();
+        }
+        visitor.setTsid(tsid);
         String accessTime = agentRecord.substring(0, DATE_PATTERN.length());
         visitor.setAccessTime(accessTime);
         String userAgent = agentRecord.substring(indexOfAgent + TAG_OF_USERAGENT.length() + 1);
@@ -55,8 +69,9 @@ public class MyRecordParser implements RecordParser {
         int indexOfIp = recordAfterPath.indexOf(TAG_OF_IP);
         String ip = recordAfterPath.substring(indexOfIp + TAG_OF_IP.length() + 1);
         visitor.setIp(ip);
-        String city = IPKit.getCityByIp(ip);
-        visitor.setCity(city);
+        String[] cityAndAddr = IPKit.getCityAndAddr(ip);
+        visitor.setCity(cityAndAddr[0]);
+        visitor.setAddr(cityAndAddr[1]);
     }
 
 

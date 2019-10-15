@@ -66,18 +66,20 @@ public class IPKit {
     }
 
     /**
-     * 根据ip地址获取是哪个城市
+     * 根据ip地址获取是哪个城市及具体地址
      * @return
      */
-    public static String getCityByIp(String ip){
+    public static String[] getCityAndAddr(String ip){
         String requestUrl = "http://whois.pconline.com.cn/ipJson.jsp";
-        String param = "ip="+ip;
-        String s = HttpUtils.sendGet(requestUrl, param,"gbk");
-        String result = s.substring(s.indexOf("{\"ip\""), s.indexOf(");}"));
+        String param = "json=true&ip="+ip;
+        String result = HttpUtils.sendGet(requestUrl, param,"gbk");
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
-        return jsonObject.get("addr").getAsString();
-    }
+        String[] cityAndAddr = new String[2];
+        cityAndAddr[0] = jsonObject.get("city").getAsString();
+        cityAndAddr[1] = jsonObject.get("addr").getAsString();
 
+        return cityAndAddr;
+    }
 
 }

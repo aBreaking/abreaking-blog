@@ -29,6 +29,7 @@ public class LogFileResolver {
     public List<Visitor> resolve(File logFile) {
         List<Visitor> list = new ArrayList<>();
         try {
+
             BufferedReader reader  = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
             while (true){
                 String agentLine = reader.readLine();

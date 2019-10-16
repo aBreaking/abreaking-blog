@@ -9,13 +9,15 @@
         <result column="addr" jdbcType="VARCHAR" property="addr" />
         <result column="path" jdbcType="VARCHAR" property="path" />
         <result column="agent" jdbcType="VARCHAR" property="agent" />
+        <result column="type" jdbcType="INTEGER" property="type" />
         <result column="access_time" jdbcType="VARCHAR" property="accessTime" />
     </resultMap>
 
     <insert id="insert" parameterType="com.abreaking.blog.utils.visitor.Visitor"  keyProperty="tsid">
-        insert into t_visitor (tsid, ip, city, addr, path, agent,access_time)
+        insert into t_visitor (tsid, ip, city, addr, path, agent,access_time,type)
         values (#{tsid,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
-          #{addr,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{accessTime,jdbcType=VARCHAR}
+          #{addr,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{accessTime,jdbcType=VARCHAR},
+          #{type,jdbcType=INTEGER}
           )
   </insert>
 

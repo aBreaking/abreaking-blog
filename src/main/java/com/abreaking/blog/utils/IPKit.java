@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -70,9 +71,22 @@ public class IPKit {
      * @return
      */
     public static String[] getCityAndAddr(String ip){
-        String requestUrl = "http://whois.pconline.com.cn/ipJson.jsp";
+        String requestUrl = "https://whois.pconline.com.cn/ipJson.jsp";
         String param = "json=true&ip="+ip;
-        String result = HttpUtils.sendGet(requestUrl, param,"gbk");
+        String result = null;
+        try {
+            result = HttpUtils.sendGet(requestUrl, param,"gbk");
+        } catch (IOException e) {
+            try {
+                //重试一次
+                System.out.println("获取城市信息失败，2秒后重试一次");
+                Thread.sleep(2000);
+                result = HttpUtils.sendGet(requestUrl, param,"gbk");
+            } catch (Exception e1) {
+                System.out.println("重试还是失败！");
+                throw new RuntimeException(e);
+            }
+        }
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
         String[] cityAndAddr = new String[2];

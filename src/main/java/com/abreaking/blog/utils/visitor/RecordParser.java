@@ -11,5 +11,58 @@ public interface RecordParser {
      * @param visitRecord 访问路径及ip这条记录怎么解析
      * @return
      */
-    Visitor parse(String agentRecord,String visitRecord);
+    Record parse(String agentRecord,String visitRecord);
+
+    /**
+     * 解析后的结果。不对解析的字段做处理
+     * @author liwei_paas
+     * @date 2019/10/16
+     */
+    class Record{
+        Long tsid;
+        String accessTime;
+        String userAgent;
+        String ip;
+        String path;
+
+        public Long getTsid() {
+            return tsid;
+        }
+
+        public void setTsid(Long tsid) {
+            this.tsid = tsid;
+        }
+
+        public String getAccessTime() {
+            return accessTime;
+        }
+
+        public void setAccessTime(String accessTime) {
+            this.accessTime = accessTime;
+        }
+
+        public String getUserAgent() {
+            return userAgent;
+        }
+
+        public void setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+        }
+
+        public String getIp() {
+            return ip;
+        }
+
+        public void setIp(String ip) {
+            this.ip = ip;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+    }
 }

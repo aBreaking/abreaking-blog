@@ -31,8 +31,7 @@ public class HttpUtils
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
-    public static String sendGet(String url, String param,String responseCharset)
-    {
+    public static String sendGet(String url, String param,String responseCharset) throws IOException {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try
@@ -55,21 +54,10 @@ public class HttpUtils
             }
             log.debug("recv - {}", result);
         }
-        catch (ConnectException e)
-        {
-            log.error("调用HttpUtils.sendGet ConnectException, url=" + url + ",param=" + param, e);
-        }
-        catch (SocketTimeoutException e)
-        {
-            log.error("调用HttpUtils.sendGet SocketTimeoutException, url=" + url + ",param=" + param, e);
-        }
-        catch (IOException e)
-        {
-            log.error("调用HttpUtils.sendGet IOException, url=" + url + ",param=" + param, e);
-        }
         catch (Exception e)
         {
             log.error("调用HttpsUtil.sendGet Exception, url=" + url + ",param=" + param, e);
+            throw e;
         }
         finally
         {

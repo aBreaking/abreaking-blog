@@ -22,22 +22,11 @@ import java.util.List;
 public class VisitorTest {
 
     @Resource
-    VisitorService visitorService;
+    VisitorStatisticsMain visitorStatisticsMain;
 
-    private static String filePath = "D:\\abreaking\\myWebsite\\logs\\blog-visitor.log";
 
     @Test
     public void test01(){
-        RecordParser parser = new MyRecordParser();
-        LogFileResolver resolver = new LogFileResolver(parser);
-        resolver.resolve(new File(filePath),(visitor)->{
-            try{
-
-                visitorService.insert(visitor);
-            }catch (Exception e){
-                e.printStackTrace();
-                System.out.println(visitor);
-            }
-        });
+        visitorStatisticsMain.main();
     }
 }

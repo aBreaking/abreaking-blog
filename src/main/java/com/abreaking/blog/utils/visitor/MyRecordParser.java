@@ -1,9 +1,7 @@
 package com.abreaking.blog.utils.visitor;
 
-import com.abreaking.blog.utils.IPKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +10,7 @@ public class MyRecordParser implements RecordParser {
 
     private static final Logger logger = LoggerFactory.getLogger(MyRecordParser.class);
 
-    protected Visitor visitor ;
+    protected Record visitor ;
 
     private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
     private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS";
@@ -25,8 +23,8 @@ public class MyRecordParser implements RecordParser {
     }
 
     @Override
-    public Visitor parse(String agentRecord, String visitRecord) {
-        this.visitor = new Visitor();
+    public Record parse(String agentRecord, String visitRecord) {
+        this.visitor = new Record();
         try{
             parseAgentRecord(agentRecord);
             parseVisitRecord(visitRecord);
@@ -55,7 +53,7 @@ public class MyRecordParser implements RecordParser {
         String accessTime = agentRecord.substring(0, DATE_PATTERN.length());
         visitor.setAccessTime(accessTime);
         String userAgent = agentRecord.substring(indexOfAgent + TAG_OF_USERAGENT.length() + 1);
-        visitor.setAgent(userAgent);
+        visitor.setUserAgent(userAgent);
     }
 
     protected void parseVisitRecord(String record){
@@ -69,9 +67,6 @@ public class MyRecordParser implements RecordParser {
         int indexOfIp = recordAfterPath.indexOf(TAG_OF_IP);
         String ip = recordAfterPath.substring(indexOfIp + TAG_OF_IP.length() + 1);
         visitor.setIp(ip);
-        String[] cityAndAddr = IPKit.getCityAndAddr(ip);
-        visitor.setCity(cityAndAddr[0]);
-        visitor.setAddr(cityAndAddr[1]);
     }
 
 

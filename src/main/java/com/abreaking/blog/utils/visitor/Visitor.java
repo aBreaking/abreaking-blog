@@ -22,6 +22,8 @@ public class Visitor {
     //访问时间
     private String accessTime;
 
+    private Integer type;
+
     public Long getTsid() {
         return tsid;
     }
@@ -78,6 +80,14 @@ public class Visitor {
         this.addr = addr;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Visitor{" +
@@ -88,6 +98,7 @@ public class Visitor {
                 ", path='" + path + '\'' +
                 ", agent='" + agent + '\'' +
                 ", accessTime='" + accessTime + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

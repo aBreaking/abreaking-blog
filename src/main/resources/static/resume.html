@@ -65,7 +65,6 @@
         width: 1002px;
         line-height: 28px;
         border: 1px solid #dedede;
-        margin-top: 2vh;
     }
 
     .column .hbox {
@@ -566,7 +565,7 @@
                     <td class="tba">
                         <table cellspacing="0" cellpadding="0" border="0">
                             <tbody>
-                            <tr>
+                            <tr id="paas-openeye">
                                 <td class="p15">
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
@@ -611,9 +610,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">承担角色：</td>
+                                                        <td valign="top" class="keys">承担任务：</td>
                                                         <td valign="top" class="txt1">
-                                                            开发工程师：需求采集，系统功能的设计并编码实现，code review，部署上线。
+                                                            功能开发与系统发布：负责需求采集，系统功能的设计并编码实现，code review，部署上线。
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -642,7 +641,7 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="paas-brm">
                                 <td class="p15">
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
@@ -684,9 +683,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">承担角色：</td>
+                                                        <td valign="top" class="keys">承担任务：</td>
                                                         <td valign="top" class="txt1">
-                                                            开发工程师：负责业务规则管理模块编码实现。
+                                                            功能开发：负责业务规则管理模块编码实现。
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -715,16 +714,14 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="paas-esb">
                                 <td class="p15">
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
                                         <tr>
                                             <td valign="top" class="rtbox"><strong>服务集成平台</strong></td>
                                             <td valign="top" >
-                                                二期：2019/9~2019/12
-                                                <span class="p5">|</span>
-                                                一期：2018/12~2019/3
+                                                2018/7~2018/12
                                             </td>
 
                                         </tr>
@@ -734,8 +731,7 @@
                                                     <tbody>
                                                     <tr>
                                                         <td valign="top" class="keys">系统简述</td>
-                                                        <td valign="top" class="txt1">监控业务中心所有PaaS产品重点指标健康状况的系统，供运维人员每日巡检使用。
-                                                            可不断集成新的产品或产品组件，定时采集各个产品的指标数据，指标有异常能够实时告警，巡检结果可生成报表。</td>
+                                                        <td valign="top" class="txt1">以电信行业应用为背景，实现ESB服务总线、服务管理平台、安全管控、日志管理等核心产品套件，为企业级SOA架构提供平台的支撑。</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -746,9 +742,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">主要技术：</td>
+                                                        <td valign="top" class="keys">涉及技术：</td>
                                                         <td valign="top" class="txt1">
-                                                            Springboot、Mybaits、Jpa、Quartz、Cache、Git、Maven、Ajax
+                                                            HSF(Dubbo)、zookeeper、Elasticsearch
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -760,9 +756,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">承担角色：</td>
+                                                        <td valign="top" class="keys">承担任务：</td>
                                                         <td valign="top" class="txt1">
-                                                            开发工程师：需求采集，系统功能的设计并编码实现，code review，部署上线。
+                                                            功能开发：负责服务同步、日志运营分析、服务监控告警等功能模块实现。
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -776,11 +772,11 @@
                                                     <tr>
                                                         <td valign="top" class="keys">我的工作：</td>
                                                         <td valign="top" class="txt1">
-                                                            参与系统平台的搭建，系统整体架构设计以及通用配置表的设计；<br>
-                                                            通过开发者Ops与运维人员进行需求对接，持续迭代、使用git进行版本控制；<br>
-                                                            设计并编码实现HSF服务提供者状态监控功能，实时监控注册中心所有应用下的Provider的状态信息；<br>
-                                                            设计并编码实现Hadoop组件监控功能，通过爬虫及jmx的方式定时采集Hdfs、Hbase、Yarn以及主机等组件指标数据；<br>
-                                                            编码实现内库SQL锁监控功能，通过Java代码调用主机脚本方式、定时执行，并将执行结果入库及展示到前台。
+                                                            针对ESB服务发布的一个痛点：线上环境（生产+发布）ESB的集群很多，每个池都需要去发布同一个服务实在太繁琐了。
+                                                            所以我设计并实现了一个服务同步功能，只需要在同步环境的ESB上发布了服务，后台自动根据选择的池进行服务自动发布。这样服务发布只需一次操作即可。
+                                                            <br>
+                                                            针对四川移动每天超大量的ESB服务调用日志，对服务的调用记录进行统计分析，形成可视化的页面，并能生成报表。
+                                                            对服务调用进行不同维度的运营分析，对各个业务系统进行服务环比统计，对重点服务的报错率进行告警。
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -791,16 +787,14 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="abreaking-blog">
                                 <td class="p15">
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
                                         <tr>
                                             <td valign="top" class="rtbox"><strong>个人技术博客</strong></td>
                                             <td valign="top" >
-                                                二期：2019/9~2019/12
-                                                <span class="p5">|</span>
-                                                一期：2018/12~2019/3
+                                                持续迭代中
                                             </td>
 
                                         </tr>
@@ -810,8 +804,7 @@
                                                     <tbody>
                                                     <tr>
                                                         <td valign="top" class="keys">系统简述</td>
-                                                        <td valign="top" class="txt1">监控业务中心所有PaaS产品重点指标健康状况的系统，供运维人员每日巡检使用。
-                                                            可不断集成新的产品或产品组件，定时采集各个产品的指标数据，指标有异常能够实时告警，巡检结果可生成报表。</td>
+                                                        <td valign="top" class="txt1">再小的个体，也有自己的品牌。个人独立编写而成的博客网站，用于个人生活记录、技术文章分享。</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -822,9 +815,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">主要技术：</td>
+                                                        <td valign="top" class="keys">主机环境：</td>
                                                         <td valign="top" class="txt1">
-                                                            Springboot、Mybaits、Jpa、Quartz、Cache、Git、Maven、Ajax
+                                                            阿里云ESC云主机环境，nginx+tomcat+mysql的单机架构
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -836,9 +829,9 @@
                                                 <table cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
                                                     <tr>
-                                                        <td valign="top" class="keys">承担角色：</td>
+                                                        <td valign="top" class="keys">博客设计：</td>
                                                         <td valign="top" class="txt1">
-                                                            开发工程师：需求采集，系统功能的设计并编码实现，code review，部署上线。
+                                                            前端页面由自己编写而成，主要技术就是h5、css、js/jq（没用前端框架）。后端由一个开源博客管理系统改进而来，主要用到SpringBoot+Mybaits技术。
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -852,11 +845,9 @@
                                                     <tr>
                                                         <td valign="top" class="keys">我的工作：</td>
                                                         <td valign="top" class="txt1">
-                                                            参与系统平台的搭建，系统整体架构设计以及通用配置表的设计；<br>
-                                                            通过开发者Ops与运维人员进行需求对接，持续迭代、使用git进行版本控制；<br>
-                                                            设计并编码实现HSF服务提供者状态监控功能，实时监控注册中心所有应用下的Provider的状态信息；<br>
-                                                            设计并编码实现Hadoop组件监控功能，通过爬虫及jmx的方式定时采集Hdfs、Hbase、Yarn以及主机等组件指标数据；<br>
-                                                            编码实现内库SQL锁监控功能，通过Java代码调用主机脚本方式、定时执行，并将执行结果入库及展示到前台。
+                                                            前端页面：按照自己的idea编写，目前已经是第三个版本了，虽不美观大方，但还算耐看；<br>
+                                                            后台功能：重做留言功能，增加跨域的操作；增加访客统计功能，访客信息记录到日志文件里面，而后对访客的行为动作进行统计；
+                                                            安全方面，防御CSRF攻击，通过在请求地址中添加token验证实现。
                                                         </td>
                                                     </tr>
                                                     </tbody>

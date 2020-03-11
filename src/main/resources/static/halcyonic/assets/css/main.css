@@ -394,10 +394,6 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	border-bottom-color: transparent;
-	color: #ffe4b4;
-}
 
 strong, b {
 	color: rgba(0, 0, 0, 0.875);
@@ -1125,6 +1121,10 @@ body.touch .poptrox-popup .nav-next {
 			color: #0366d6;
 		}
 
+		#content a:hover{
+			color: #ff2c2c;
+		}
+
 		#content header {
 			margin: 0 0 2em 0;
 		}
@@ -1200,6 +1200,10 @@ body.touch .poptrox-popup .nav-next {
 
 		#copyright a {
 			color: #8d9ca3;
+		}
+
+		#copyright a:hover{
+			color: #ff2c2c;
 		}
 
 /* Large */

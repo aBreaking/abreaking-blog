@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='保存文章',active='publish'">
 <header th:replace="admin/header::headerFragment(${title},${active})"></header>
 <link th:href="@{/admin/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
@@ -169,7 +169,14 @@
 <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
 <script th:src="@{/admin/js/article.js}"></script>
 <script type="text/javascript">
-    var interval = 30;
+    /**
+     * 自动保存文章，
+     * 目前不建议使用，不然搞得每次写一半时页面总会卡一哈。
+     * 这里的解决是将定时器interval调得很大
+     * @deprecated
+     * @type {number}
+     */
+    var interval = 7200;
     var intervalId;
     $("#text").bind("input",function(){
         if (!intervalId){
@@ -179,6 +186,7 @@
                 if (title == '') {
                     tale.alertWarn('请输入文章标题');
                     return;
+
                 }
                 if (content == '') {
                     tale.alertWarn('请输入文章内容');

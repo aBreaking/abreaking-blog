@@ -1985,6 +1985,6 @@ ul.actions li {
 	text-align: center;
 }
 
-.markdown-body ul,ol{
+.markdown-body ul,.markdown-body ol{
 	list-style: revert !important;
 }

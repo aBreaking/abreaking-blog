@@ -1984,3 +1984,7 @@ ul.actions li {
 	top: 55%;
 	text-align: center;
 }
+
+.markdown-body ul,ol{
+	list-style: revert !important;
+}

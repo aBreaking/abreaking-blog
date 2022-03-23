@@ -535,9 +535,9 @@
                                 <td class="tb1" colspan="2">
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
-                                            <tr><td valign="top" class="txt1"><span class="tag">1. 4年+的开发经验，后端熟练Java开发，了解Go开发；前端掌握Vue.js技术；</span></td></tr>
-                                            <tr><td valign="top" class="txt1"><span class="tag">2. 良好的编码习惯，优秀的代码品味，熟悉常用的设计模式，具备架构设计能力；</span></td></tr>
-                                            <tr><td valign="top" class="txt1"><span class="tag">3. 尝试探索新技术，活跃于开源社区，能持续学习、自我迭代。 </span></td></tr>
+                                            <tr><td valign="top" class="txt1"><span class="tag">1. 4年+的开发经验，掌握前端后端开发技术，乐意探索新技术，活跃于开源社区；</span></td></tr>
+                                            <tr><td valign="top" class="txt1"><span class="tag">2. 强悍的编码能力，良好的编码习惯，优秀的代码品味，善于分析并解决问题；</span></td></tr>
+                                            <tr><td valign="top" class="txt1"><span class="tag">3. 能写各种文档，包括策划书、设计文档、功能文档、以及技术分享等文档。 </span></td></tr>
                                         </tbody>
                                     </table>
                                 </td>
@@ -563,10 +563,10 @@
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
                                             <tr><td valign="top" class="txt1"><span class="tag">1. 熟悉Java，了解JVM、网络、操作系统等底层知识，理解集合、并发、IO、反射等底层原理；</span></td></tr>
-                                            <tr><td valign="top" class="txt1"><span class="tag">2. 熟练主流开发框架，包括Spring/Spring Boot、Mybaits、Hibernetes等，并理解其原理；</span></td></tr>
+                                            <tr><td valign="top" class="txt1"><span class="tag">2. 熟练主流开发框架，包括Spring/Spring Boot、Mybaits、Vue.js等，并理解其原理；</span></td></tr>
                                             <tr><td valign="top" class="txt1"><span class="tag">3. 熟悉Mysql、Oracle数据库，扎实的SQL基础，并了解Elasticsearch、Redis等NoSql技术；</span></td></tr>
                                             <tr><td valign="top" class="txt1"><span class="tag">4. 了解分布式、云原生等中间件技术，包括：Dubbo、Zookeeper、Service Mesh、Serverless、Knative等；</span></td></tr>
-                                            <tr><td valign="top" class="txt1"><span class="tag">5. 熟练各种开发环境和工具，如linux、docker、git、idea、eclipse、maven、svn等；</span></td></tr>
+                                            <tr><td valign="top" class="txt1"><span class="tag">5. 熟练各种开发环境和工具，如linux、docker、k8s、git、idea、eclipse、maven、svn等。</span></td></tr>
                                         </tbody>
                                     </table>
                                 </td>
@@ -630,11 +630,13 @@
                                                         <td valign="top" class="txt1">
                                                             担任项目技术负责人，对系统后端技术选型、架构设计、表结构设计、集群方案，参与功能需求分析、方案制定以及编码实现。
                                                             实现的功能包括：<br>
-                                                            <b>服务提供者监控</b>：通过java zkclient等技术手段，远程获取注册中心zookeeper中所有应用下的provider信息，采集并入库，页面展示实时数据，当有新增新的provider节点或provider下线时，平台即告警；
+                                                            <b>通用监控逻辑设计</b>：生产上有若干paas产品，采集数据的方式可能不一致，监控告警的表现形式需要尽可能做到统一，为此进行分析、讨论，完成主要的接口设计、核心告警逻辑编写，对接短信平台。
                                                             <br>
-                                                            <b>hadoop组件监控</b>：通过java相关的爬虫技术，爬取hbase、hdfs、yarn等组件的运维页面，获取运维人员重点关注数据，采集入库，页面展示，并实现自定义的告警逻辑；
+                                                            <b>生产环境provider监控</b>：定时监控生产环境所有注册中心provider上下线情况。通过zkClient、多线程等技术手段，远程获取注册中心中所有应用下的provider信息，采集并入库，可视化，定义监控告警逻辑；
                                                             <br>
-                                                            <b>ESB服务运营报表</b>：从日志库、elasticsearch上统计并分析ESB服务日志的调用量、报错量以及其他重点关注的指标，包括环比、tps等多个维度的统计分析，并形成报表数据展示；
+                                                            <b>编写爬虫获取运营数据</b>：通过java相关的爬虫技术，爬取hbase、hdfs、yarn等组件的运维页面，获取运维人员重点关注数据，采集入库，页面展示，并实现自定义的告警逻辑；
+                                                            <br>
+                                                            <b>可视化运营报表</b>：从日志数据库、elasticsearch上统计并分析ESB服务日志的调用量、报错量以及其他重点关注的指标，包括环比、tps等多个维度的统计分析，并形成报表数据展示；
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -680,7 +682,7 @@
                                                     <tr>
                                                         <td valign="top" class="keys">主要技术：</td>
                                                         <td valign="top" class="txt1">
-                                                            Springboot、Mybaits、Mysql、EasyJpa、ELK、Vue、Git
+                                                            Springboot、Mybaits、Mysql、EasyJpa、Elasticsearch、Vue
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -694,9 +696,12 @@
                                                     <tr>
                                                         <td valign="top" class="keys">承担任务：</td>
                                                         <td valign="top" class="txt1">担任开发小组组长，指导团队成员，负责功能需求分析、总体设计、开发实现。主要是前端页面的编写以及后台逻辑的实现，实现的功能包括：<br>
-                                                            <b>能力管控</b>：实现能力注册，能力上架下架，以及一键发布到指定的核心域的功能，供三方厂商可以申请后使用；<br>
-                                                            <b>场景管理</b>：实现场景的增删改查，场景的复用等功能，场景下关联多个活动，活动关联单个能力等逻辑的实现；<br>
-                                                            <b>三码一号</b>：对接集团能力开放平台，实现日志上报、服务请求头拦截校验等功能，设计并实现日志上报失败之后的重试逻辑，并解决集群模式下的分布式一致性的问题； <br>
+                                                            <b>分布式一致性问题解决</b>：针对日志定时上报这一需求，基于“保证10分钟内可用就行”以及“不想引入三方组件（如zk）”的条件，直接利用Mysql数据库设计并达成了“保证最终一致性”这一效果。
+                                                            <br>
+                                                            <b>一键服务发布</b>：针对核心域多集群、跨中心，服务要发布多次这一现状，设计并实现了一键发布到1个或多个的核心域的功能，避免多次发布的重复劳动；
+                                                            <br>
+                                                            <b>请求头校验通用逻辑设计</b>：对接集团能力开放平台，实现对需要验收的服务统一管控，并在网关侧拦截服务请求，设计通过校验的逻辑，形成组件，供其他场景重复利用；
+                                                            <br>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -755,8 +760,8 @@
                                                         <td valign="top" class="keys">项目总结：</td>
                                                         <td valign="top" class="txt1">负责该产品的研发迭代，分配的任务，设计并编码实现，最后评审交付。实现的功能包括：<br>
                                                             <b>服务同步</b>：针对集群的模式，实现单个实例新增了服务之后，自动同步到其他实例的功能；<br>
-                                                            <b>服务验证</b>：设计并实现了一套服务调用时的责任链模式，功能点包括服务入参验证、调用端黑白名单校验、请求头参数设置、路由等功能，进而保证服务调用的安全性，服务调用过程的全链路追踪。<br>
-                                                            <b>服务限流</b>：设计并实现了服务限流功能，实现基于redis滑动时间窗口的限流算法；<br>
+                                                            <b>分流路由</b>：根据工号、用户ID、号码等参数，实现路由算法，并根据现网迭代的需求，实现老服务到新服务之前的流量分割。<br>
+                                                            <b>服务限流</b>：编码实现了服务限流功能，基于滑动时间窗口的限流算法，分别实现redis和cohrence两种策略；<br>
                                                         </td>
                                                     </tr>
                                                     <tr>

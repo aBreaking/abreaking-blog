@@ -3,6 +3,10 @@ package com.abreaking.blog.utils;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -12,7 +16,8 @@ import java.io.*;
  * @author liwei@abreaking
  * @date 2023/8/4
  */
-public class ThumbUtils {
+@Component
+public class ThumbUtils implements ApplicationContextAware {
 
     private static final Logger logger = LoggerFactory.getLogger(ThumbUtils.class);
 
@@ -26,8 +31,13 @@ public class ThumbUtils {
     private static final Double ZERO_FOUR_FOUR = 0.44;
     private static final Double ZERO_FOUR = 0.4;
 
+    static ApplicationContext applicationContext;
+
     public static void compressImgToThumb(byte[] imageBytes,String outputThumbFile) throws IOException {
-        byte[] bytes = compressPicForScale(imageBytes, 60);
+
+        String size = applicationContext.getEnvironment().getProperty("img.thumb.size", "60");
+
+        byte[] bytes = compressPicForScale(imageBytes, Integer.parseInt(size));
         File file = new File(outputThumbFile);
         if (file.exists()) file.delete();
         file.createNewFile();
@@ -120,4 +130,8 @@ public class ThumbUtils {
         return accuracy;
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ThumbUtils.applicationContext = applicationContext;
+    }
 }

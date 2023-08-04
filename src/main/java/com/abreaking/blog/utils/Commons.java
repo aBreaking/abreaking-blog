@@ -6,13 +6,18 @@ import com.github.pagehelper.PageInfo;
 import com.abreaking.blog.model.Vo.ContentVo;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,10 +27,13 @@ import java.util.regex.Pattern;
  * Created by 13 on 2017/2/21.
  */
 @Component
-public final class Commons {
+public final class Commons implements ApplicationContextAware {
 
     public static String THEME = "themes/default";
 
+    static ApplicationContext applicationContext;
+
+    static MapCache CACHE = MapCache.single();
     /**
      * 判断分页中是否有数据
      *
@@ -316,9 +324,16 @@ public final class Commons {
      * @return
      */
     public static String show_thumb(int number) {
-        int size = number % 14;
-        size = size == 0 ? 1 : size;
-        return "/user/img/rand/" + size + ".jpg";
+
+        File[] files = CACHE.getOrSetCache("user.img.rand",r->{
+            String imgRandPath = applicationContext.getEnvironment().getProperty("img.rand.path");
+            File file = new File(imgRandPath);
+            return  file.listFiles();
+        });
+
+        Random random = new Random();
+        int r = random.nextInt(files.length);
+        return "/user/img/rand/" + files[r].getName();
     }
 
     /**
@@ -395,4 +410,8 @@ public final class Commons {
         return map;
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        Commons.applicationContext = applicationContext;
+    }
 }

@@ -2,6 +2,8 @@ package com.abreaking.blog.utils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * map缓存实现
@@ -149,6 +151,19 @@ public class MapCache {
      */
     public void clean() {
         cachePool.clear();
+    }
+
+    public <T> T getOrSetCache(String key, Function<String,T> function){
+        T o = get(key);
+        if (o == null){
+            synchronized (INS){
+                if ((o=get(key)) == null){
+                    o = function.apply(key);
+                    set(key,o);
+                }
+            }
+        }
+        return o;
     }
 
     static class CacheObject {

@@ -96,7 +96,8 @@ public class IndexController extends BaseController {
      */
     @GetMapping(value = {"article/{cid}", "article/{cid}.html"})
     public String getArticle(HttpServletRequest request, @PathVariable String cid) {
-        ContentVo contents = contentService.getContents(cid);
+        ContentVo contents = CACHE.getOrSetCache(cid, contentService::getContents);
+
         if (null == contents || "draft".equals(contents.getStatus())) {
             return this.render_404();
         }

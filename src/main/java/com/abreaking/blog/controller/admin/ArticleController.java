@@ -2,6 +2,7 @@ package com.abreaking.blog.controller.admin;
 
 
 import com.abreaking.blog.utils.IPKit;
+import com.abreaking.blog.utils.MapCache;
 import com.github.pagehelper.PageInfo;
 import com.abreaking.blog.constant.WebConst;
 import com.abreaking.blog.controller.BaseController;
@@ -45,6 +46,8 @@ public class ArticleController extends BaseController {
 
     @Resource
     private ILogService logService;
+
+    MapCache CACHE = MapCache.single();
 
     @GetMapping(value = "")
     public String index(@RequestParam(value = "page", defaultValue = "1") int page,
@@ -102,6 +105,7 @@ public class ArticleController extends BaseController {
             contents.setType(Types.ARTICLE.getType());
         }
         String result = contentsService.updateArticle(contents);
+        CACHE.del(contents.getCid().toString());
         if (!WebConst.SUCCESS_RESULT.equals(result)) {
             return RestResponseBo.fail(result);
         }
@@ -112,6 +116,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public RestResponseBo delete(@RequestParam int cid, HttpServletRequest request) {
         String result = contentsService.deleteByCid(cid);
+        CACHE.del(String.valueOf(cid));
         logService.insertLog(LogActions.DEL_ARTICLE.getAction(), cid + "", IPKit.getIpAddrByRequest(request), this.getUid(request));
         if (!WebConst.SUCCESS_RESULT.equals(result)) {
             return RestResponseBo.fail(result);

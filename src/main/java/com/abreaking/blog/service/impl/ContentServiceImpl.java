@@ -2,6 +2,7 @@ package com.abreaking.blog.service.impl;
 
 import com.abreaking.blog.constant.WebConst;
 import com.abreaking.blog.exception.TipException;
+import com.abreaking.blog.utils.ThumbUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.abreaking.blog.dao.ContentVoMapper;
@@ -25,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2017/3/13 013.
@@ -84,6 +87,8 @@ public class ContentServiceImpl implements IContentService {
         if (null == contents.getSummary()){
             contents.setSummary(defaultSummary(contents.getContent()));
         }
+
+        handleContentImgWithThumb(contents);
 
         contents.setContent(EmojiParser.parseToAliases(contents.getContent()));
 
@@ -262,5 +267,23 @@ public class ContentServiceImpl implements IContentService {
     private String defaultSummary(String content){
         int defaultSize = 200;
         return content.length()<defaultSize?content:content.substring(0,defaultSize);
+    }
+
+    private static final String MD_IMG_REGEX = "!\\[.*](.*)";
+
+    private static final String IMG_REPLACE_STR = "<p class=\"thumb\"><a href=\"%s\"><img src=\"%s\"></a></p>";
+
+    private void handleContentImgWithThumb(ContentVo contentVo){
+        Pattern pattern = Pattern.compile(MD_IMG_REGEX);
+        Matcher matcher = pattern.matcher(contentVo.getContent());
+        StringBuffer builder = new StringBuffer();
+        while (matcher.find()){
+            String group = matcher.group();
+            String imgPath = group.substring(group.indexOf("(") + 1, group.indexOf(")"));
+            String thumb = ThumbUtils.createThumb(imgPath);
+            String format = String.format(IMG_REPLACE_STR,imgPath, thumb);
+            matcher.appendReplacement(builder,format);
+        }
+        contentVo.setContent(builder.toString());
     }
 }

@@ -252,6 +252,7 @@ public class ContentServiceImpl implements IContentService {
         if (StringUtils.isBlank(contents.getSlug())) {
             contents.setSlug(null);
         }
+        handleContentImgWithThumb(contents);
         int time = DateKit.getCurrentUnixTime();
         contents.setModified(time);
         Integer cid = contents.getCid();
@@ -274,6 +275,9 @@ public class ContentServiceImpl implements IContentService {
     private static final String IMG_REPLACE_STR = "<p class=\"thumb\"><a href=\"%s\"><img src=\"%s\"></a></p>";
 
     private void handleContentImgWithThumb(ContentVo contentVo){
+        if (!contentVo.getStatus().equals(Types.PUBLISH.getType())){
+            return ;
+        }
         Pattern pattern = Pattern.compile(MD_IMG_REGEX);
         Matcher matcher = pattern.matcher(contentVo.getContent());
         StringBuffer builder = new StringBuffer();
@@ -284,6 +288,7 @@ public class ContentServiceImpl implements IContentService {
             String format = String.format(IMG_REPLACE_STR,imgPath, thumb);
             matcher.appendReplacement(builder,format);
         }
+        matcher.appendTail(builder);
         contentVo.setContent(builder.toString());
     }
 }
